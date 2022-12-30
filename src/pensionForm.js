@@ -11,13 +11,15 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Slider from "@mui/material/Slider";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import PropTypes from "prop-types";
 
 function isNumeric(str) {
     if (typeof str != "string") return false; // we only process strings!
-    return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-        !isNaN(parseFloat(str)); // ...and ensure strings of whitespace fail
+    return (
+        !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+        !isNaN(parseFloat(str))
+    ); // ...and ensure strings of whitespace fail
 }
-
 
 class PensionForm extends React.Component {
     constructor(props) {
@@ -27,7 +29,7 @@ class PensionForm extends React.Component {
     }
 
     handleChange = (event) => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
 
         if (isNumeric(value)) {
             this.form[name] = +value;
@@ -41,7 +43,7 @@ class PensionForm extends React.Component {
     render() {
         return (
             <Grid container direction={"column"} spacing={1}>
-                <Grid item sx={{mt: 2}}>
+                <Grid item sx={{ mt: 2 }}>
                     <InputLabel>Age</InputLabel>
                     <Slider
                         name="age"
@@ -51,7 +53,6 @@ class PensionForm extends React.Component {
                         step={1}
                         valueLabelDisplay="on"
                         onChange={this.handleChange}
-
                     />
                 </Grid>
                 <Grid item>
@@ -118,15 +119,14 @@ class PensionForm extends React.Component {
                 </Grid>
                 <Grid item>
                     <InputLabel id="addedPensionTypeInput">Added Pension Type</InputLabel>
-                    <FormControl variant="standard" fullWidth >
+                    <FormControl variant="standard" fullWidth>
                         <Select
                             name="addedPensionType"
                             value={this.form.addedPensionType}
                             labelId="addedPensionTypeInput"
                             id="demo-simple-select"
                             label="Added Pension Type"
-                            onChange={this.handleChange}
-                        >
+                            onChange={this.handleChange}>
                             <MenuItem value="self">Self</MenuItem>
                             <MenuItem value="self+dependants">Self & Dependants</MenuItem>
                         </Select>
@@ -134,15 +134,14 @@ class PensionForm extends React.Component {
                 </Grid>
                 <Grid item>
                     <InputLabel id="EPALabel">EPA</InputLabel>
-                    <FormControl variant="standard" fullWidth >
+                    <FormControl variant="standard" fullWidth>
                         <Select
                             name="EPAPension"
                             value={this.form.EPAPension}
                             labelId="EPALabel"
                             id="EPAPension"
                             label="Added Pension Type"
-                            onChange={this.handleChange}
-                        >
+                            onChange={this.handleChange}>
                             <MenuItem value="0">No EPA</MenuItem>
                             <MenuItem value="65">65</MenuItem>
                             <MenuItem value="66">66</MenuItem>
@@ -179,5 +178,10 @@ class PensionForm extends React.Component {
         );
     }
 }
+
+PensionForm.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    initialState: PropTypes.object.isRequired
+};
 
 export default PensionForm;
