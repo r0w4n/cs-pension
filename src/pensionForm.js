@@ -22,6 +22,10 @@ function isNumeric(str) {
 }
 
 class PensionForm extends React.Component {
+    /**
+     *
+     * @param {object} props
+     */
     constructor(props) {
         super(props);
         this.onChange = props.onChange;
@@ -40,20 +44,16 @@ class PensionForm extends React.Component {
         this.onChange(this.form);
     };
 
+    /**
+     *
+     * @return string
+     */
     render() {
         return (
             <Grid container direction={"column"} spacing={1}>
                 <Grid item sx={{ mt: 2 }}>
                     <InputLabel>Age</InputLabel>
-                    <Slider
-                        name="age"
-                        value={this.form.age}
-                        min={16}
-                        max={70}
-                        step={1}
-                        valueLabelDisplay="on"
-                        onChange={this.handleChange}
-                    />
+                    <Slider name="age" value={this.form.age} min={16} max={70} step={1} valueLabelDisplay="on" onChange={this.handleChange} />
                 </Grid>
                 <Grid item>
                     <InputLabel>Normal Pension Age</InputLabel>

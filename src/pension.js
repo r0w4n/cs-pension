@@ -8,6 +8,7 @@ const statePension = 9660;
 /**
  * Pension Calulation Class
  * @return {Pension}
+ * @todo fix when reduced hours age is less that current age
  */
 class Pension {
     /**
@@ -23,11 +24,8 @@ class Pension {
      * @return {integer}
      */
     calculatePensionForNormalPensionAge = () => {
-        // number of years until retirement * yearly pension pot grown + exiting pension pot
-        return Math.round(
-            this.getPensionableYears() * this.getYearlyPensionPotGrowth() +
-                this.parameters.currentPensionPot
-        );
+        // number of years until retirement * yearly pension pot grown + existing pension pot
+        return Math.round(this.getPensionableYears() * this.getYearlyPensionPotGrowth() + this.parameters.currentPensionPot);
     };
 
     /**
@@ -40,20 +38,9 @@ class Pension {
         // number of years between reduced hours and retirement * yearly pension pot growth (pro rata) +
         // current pension pot
 
-        console.info(
-            this.parameters.reducedHoursAge - this.parameters.age,
-            this.getYearlyPensionPotGrowth()
-        );
-        console.info(
-            this.parameters.normalPensionAge - this.parameters.reducedHoursAge,
-            this.getYearlyPensionPotGrowth(true)
-        );
-
         return Math.round(
-            (this.parameters.reducedHoursAge - this.parameters.age) *
-                this.getYearlyPensionPotGrowth() +
-                (this.parameters.normalPensionAge - this.parameters.reducedHoursAge) *
-                    this.getYearlyPensionPotGrowth(true) +
+            (this.parameters.reducedHoursAge - this.parameters.age) * this.getYearlyPensionPotGrowth() +
+                (this.parameters.normalPensionAge - this.parameters.reducedHoursAge) * this.getYearlyPensionPotGrowth(true) +
                 this.parameters.currentPensionPot
         );
     };
@@ -62,10 +49,7 @@ class Pension {
         // calculatePensionForNormalPensionAgeWithReducedHours +
         // added pension of complete period
 
-        return Math.round(
-            this.calculatePensionForNormalPensionAgeWithReducedHours() +
-                this.calculateAddedPensionForMultipleYears()
-        );
+        return Math.round(this.calculatePensionForNormalPensionAgeWithReducedHours() + this.calculateAddedPensionForMultipleYears());
     };
 
     /**
@@ -74,11 +58,8 @@ class Pension {
      * @param {*} parameters
      * @return {number}
      */
-    calculatePensionWithMonthlyAddedPension = () => {
-        return Math.round(
-            this.calculateAddedPensionForMultipleYears() +
-                this.calculatePensionForNormalPensionAge()
-        );
+    calculatePensionNormalRetirementWithMonthlyAddedPension = () => {
+        return Math.round(this.calculateAddedPensionForMultipleYears() + this.calculatePensionForNormalPensionAge());
     };
 
     /**
@@ -90,14 +71,25 @@ class Pension {
      */
     calculateAddedPensionForMultipleYears = (earlyRetirement = false) => {
         let addedPensionPot = 0;
-        for (let index = this.getPensionableYears(earlyRetirement); index > 0; index--) {
-            addedPensionPot +=
-                ((12 * this.parameters.monthlyAddedPensionPayment) /
-                    this.getAddedPensionByPeriodicalContributionFactors(this.parameters)) *
-                this.getAddedPensionRevaluationFactorByYears(earlyRetirement);
+        let totalContributionsForYear = 12 * this.parameters.monthlyAddedPensionPayment;
+        let retirementAge = earlyRetirement === true ? this.parameters.earlyRetirementAge : this.parameters.normalPensionAge;
+        for (let age = this.parameters.age; age < retirementAge; age++) {
+            addedPensionPot += this.calulateAddedPensionForYearForGivenAge(totalContributionsForYear, age);
         }
 
         return addedPensionPot;
+    };
+
+    /**
+     *
+     * @param {integer} totalContributionsForPeriod
+     * @param {integer} age
+     * @return integer
+     */
+    calulateAddedPensionForYearForGivenAge = (totalContributionsForPeriod, age) => {
+        return Math.round(
+            totalContributionsForPeriod / (this.getAddedPensionByPeriodicalContributionFactors(age) * this.getAddedPensionRevaluationFactorByYears(age))
+        );
     };
 
     /**
@@ -125,27 +117,16 @@ class Pension {
      * @return {integer}
      */
     calculatePensionEarlyRetirementMonthlyAddedPension = () => {
-        return Math.round(
-            this.calculateAddedPensionForMultipleYears(true) +
-                this.calculatePensionForEarlyRetirement()
-        );
+        return Math.round(this.calculateAddedPensionForMultipleYears(true) + this.calculatePensionForEarlyRetirement());
     };
 
     calculatePensionForEarlyRetirementWithReducedHours = () => {
         // number of years before reduced hours * yearly pension pot growth +
         // number of years between reduced hours and retirement * yearly pension pot growth (pro rata) +
         // current pension pot
-
-        // console.info("number of years before reduced hours", this.parameters.reducedHoursAge - this.parameters.age, this.getYearlyPensionPotGrowth());
-        // console.info("number of years after reduced hours", this.parameters.earlyRetirementAge - this.parameters.reducedHoursAge,
-        //     this.getYearlyPensionPotGrowth(true));
-
         return Math.round(
-            (this.parameters.reducedHoursAge - this.parameters.age) *
-                this.getYearlyPensionPotGrowth() +
-                (this.parameters.earlyRetirementAge - this.parameters.reducedHoursAge) *
-                    this.getYearlyPensionPotGrowth(true) +
-                this.parameters.currentPensionPot
+            (this.parameters.reducedHoursAge - this.parameters.age) * this.getYearlyPensionPotGrowth() +
+                (this.parameters.earlyRetirementAge - this.parameters.reducedHoursAge) * this.getYearlyPensionPotGrowth(true)
         );
     };
 
@@ -153,10 +134,7 @@ class Pension {
         // calculatePensionForEarlyRetirementWithReducedHours +
         // added pension of complete period
 
-        return Math.round(
-            this.calculatePensionForEarlyRetirementWithReducedHours() +
-                this.calculateAddedPensionForMultipleYears(true)
-        );
+        return Math.round(this.calculatePensionForEarlyRetirementWithReducedHours() + this.calculateAddedPensionForMultipleYears(true));
     };
 
     /**
@@ -168,8 +146,9 @@ class Pension {
         let yearlyPensionPotGrowth = this.parameters.pensionableEarnings * pensionAccrualFactor;
 
         if (reducedHours === true) {
-            yearlyPensionPotGrowth =
-                yearlyPensionPotGrowth * (this.parameters.reducedHoursPercentage / 100);
+            console.info(yearlyPensionPotGrowth);
+            yearlyPensionPotGrowth = yearlyPensionPotGrowth * (this.parameters.reducedHoursPercentage / 100);
+            console.info(yearlyPensionPotGrowth);
         }
 
         return Math.round(yearlyPensionPotGrowth);
@@ -208,9 +187,7 @@ class Pension {
      * @return {float}
      */
     getEarlyReductionFactors = () => {
-        return earlyPaymentReductionFactors[this.getEffectiveNormalRetirementAge()][
-            this.parameters.earlyRetirementAge
-        ];
+        return earlyPaymentReductionFactors[this.getEffectiveNormalRetirementAge()][this.parameters.earlyRetirementAge];
     };
 
     /**
@@ -218,10 +195,10 @@ class Pension {
      * https://www.civilservicepensionscheme.org.uk/media/btmmnayj/alpha-added-pension-factors-and-guidance.pdf
      * @return {float}
      */
-    getAddedPensionByPeriodicalContributionFactors = () => {
-        return addedPensionByPeriodicalContributionFactors[this.parameters.age][
-            this.parameters.addedPensionType
-        ];
+    getAddedPensionByPeriodicalContributionFactors = (age) => {
+        let factorPart = addedPensionByPeriodicalContributionFactors[this.parameters.normalPensionAge][age];
+
+        return factorPart[this.parameters.addedPensionType == "self+dependants" ? 2 : 0];
     };
 
     /**
@@ -230,9 +207,8 @@ class Pension {
      * @param {boolean} earlyRetirement
      * @return {float}
      */
-    getAddedPensionRevaluationFactorByYears = (earlyRetirement = false) => {
-        return addedPensionRevaluationFactorByYears[this.getPensionableYears(earlyRetirement)]
-            .factor;
+    getAddedPensionRevaluationFactorByYears = (age) => {
+        return addedPensionRevaluationFactorByYears[this.parameters.normalPensionAge - age].factor;
     };
 }
 
@@ -241,17 +217,12 @@ function calculatePensionPots(parameters) {
     return {
         pensionForNormalPensionAge: pension.calculatePensionForNormalPensionAge(),
         pensionForEarlyRetirement: pension.calculatePensionForEarlyRetirement(parameters),
-        pensionWithMonthlyAddedPension: pension.calculatePensionWithMonthlyAddedPension(parameters),
-        pensionEarlyRetirementMonthlyAddedPension:
-            pension.calculatePensionEarlyRetirementMonthlyAddedPension(parameters),
-        pensionForNormalPensionAgeWithReducedHours:
-            pension.calculatePensionForNormalPensionAgeWithReducedHours(),
-        pensionNormalRetirementAddedPensionReducedHours:
-            pension.calculatePensionNormalRetirementAddedPensionReducedHours(),
-        pensionForEarlyRetirementWithReducedHours:
-            pension.calculatePensionForEarlyRetirementWithReducedHours(),
-        pensionForEarlyRetirementWithAddedPensionReducedHours:
-            pension.calculatePensionForEarlyRetirementWithAddedPensionReducedHours()
+        pensionWithMonthlyAddedPension: pension.calculatePensionNormalRetirementWithMonthlyAddedPension(parameters),
+        pensionEarlyRetirementMonthlyAddedPension: pension.calculatePensionEarlyRetirementMonthlyAddedPension(parameters),
+        pensionForNormalPensionAgeWithReducedHours: pension.calculatePensionForNormalPensionAgeWithReducedHours(),
+        pensionNormalRetirementAddedPensionReducedHours: pension.calculatePensionNormalRetirementAddedPensionReducedHours(),
+        pensionForEarlyRetirementWithReducedHours: pension.calculatePensionForEarlyRetirementWithReducedHours(),
+        pensionForEarlyRetirementWithAddedPensionReducedHours: pension.calculatePensionForEarlyRetirementWithAddedPensionReducedHours()
     };
 }
 
