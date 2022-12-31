@@ -96,28 +96,28 @@ function App() {
                                                         <PensionCalulationCard
                                                             title="Your annual pension is"
                                                             subtitle="including state pension"
-                                                            pension={cardData.pensionForNormalPensionAge}
+                                                            pension={cardData.pensionForNPA}
                                                         />
                                                     </Grid>
                                                     <Grid item xs={3}>
                                                         <PensionCalulationCard
                                                             title="Your annual pension with added pension is"
                                                             subtitle="including state pension"
-                                                            pension={cardData.pensionWithMonthlyAddedPension}
+                                                            pension={cardData.pensionForNPAWithMonthlyAddedPension}
                                                         />
                                                     </Grid>
                                                     <Grid item xs={3}>
                                                         <PensionCalulationCard
                                                             title="Your annual pension with reduced hours is"
                                                             subtitle="including state pension"
-                                                            pension={cardData.pensionForNormalPensionAgeWithReducedHours}
+                                                            pension={cardData.pensionForNPAWithReducedHours}
                                                         />
                                                     </Grid>
                                                     <Grid item xs={3}>
                                                         <PensionCalulationCard
                                                             title="Your annual pension with reduced hours and added pension is"
                                                             subtitle="including state pension"
-                                                            pension={cardData.pensionNormalRetirementAddedPensionReducedHours}
+                                                            pension={cardData.pensionForNPAWithAddedPensionAndReducedHours}
                                                         />
                                                     </Grid>
                                                 </Grid>
@@ -145,7 +145,7 @@ function App() {
                                                         <PensionCalulationCard
                                                             title="Your annual early retirement pension with added pension is"
                                                             subtitle="including state pension (at NPA)"
-                                                            pension={cardData.pensionEarlyRetirementMonthlyAddedPension}
+                                                            pension={cardData.pensionForEarlyRetirementMonthlyAddedPension}
                                                         />
                                                     </Grid>
                                                     <Grid item xs={3}>

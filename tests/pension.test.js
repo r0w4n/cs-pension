@@ -8,7 +8,7 @@ test("calculate pension when aged 45, pensionable earnings are £30000 with a pe
         currentPensionPot: 1000,
         normalPensionAge: 67
     });
-    expect(pension.calculatePensionForNormalPensionAge()).toBe(16312);
+    expect(pension.calculatepensionForNPA()).toBe(16312);
 });
 
 test("calculate pension when aged 33, pensionable earnings are £40000 with a pension pot of £9000 and normal pension age of 68", () => {
@@ -18,7 +18,7 @@ test("calculate pension when aged 33, pensionable earnings are £40000 with a pe
         currentPensionPot: 9000,
         normalPensionAge: 68
     });
-    expect(pension.calculatePensionForNormalPensionAge()).toBe(41480);
+    expect(pension.calculatepensionForNPA()).toBe(41480);
 });
 
 test("calculate pension when aged 49, pensionable earnings are £40000 with a pension pot of £9000 and normal pension age of 67", () => {
@@ -28,7 +28,7 @@ test("calculate pension when aged 49, pensionable earnings are £40000 with a pe
         currentPensionPot: 0,
         normalPensionAge: 67
     });
-    expect(pension.calculatePensionForNormalPensionAge()).toBe(16704);
+    expect(pension.calculatepensionForNPA()).toBe(16704);
 });
 
 test("calculate early retirement pension when aged 33, pensionable earnings are £40000 with a pension pot of £9000 and normal pension age of 55", () => {
@@ -142,7 +142,7 @@ test("calculate pension when aged 45, pensionable earnings are £40000 with a pe
         reducedHoursAge: 50,
         reducedHoursPercentage: 50
     });
-    expect(pension.calculatePensionForNormalPensionAgeWithReducedHours()).toBe(12528);
+    expect(pension.calculatepensionForNPAWithReducedHours()).toBe(12528);
 });
 
 test("calculate pension when aged 30, pensionable earnings are £30000 with a pension pot of £1000 and normal pension age of 67, reducing hours at 45 to 30%", () => {
@@ -154,7 +154,7 @@ test("calculate pension when aged 30, pensionable earnings are £30000 with a pe
         reducedHoursAge: 45,
         reducedHoursPercentage: 30
     });
-    expect(pension.calculatePensionForNormalPensionAgeWithReducedHours()).toBe(16038);
+    expect(pension.calculatepensionForNPAWithReducedHours()).toBe(16038);
 });
 
 test("calculate pension when aged 36, pensionable earnings are £42342 with a pension pot of £5345 and normal pension age of 68, reducing hours at 48 to 43%", () => {
@@ -166,7 +166,7 @@ test("calculate pension when aged 36, pensionable earnings are £42342 with a pe
         reducedHoursAge: 48,
         reducedHoursPercentage: 43
     });
-    expect(pension.calculatePensionForNormalPensionAgeWithReducedHours()).toBe(25569);
+    expect(pension.calculatepensionForNPAWithReducedHours()).toBe(25569);
 });
 
 test("calulate Added Pension For Year For Given Age when \
@@ -265,5 +265,5 @@ test("calculate Added Pension For Multiple Years when \
 //         normalPensionAge: 68
 //     });
 
-//     expect(pension.calculatePensionNormalRetirementWithMonthlyAddedPension()).toBe(268);
+//     expect(pension.calculatePensionNPAWithMonthlyAddedPension()).toBe(268);
 // });
