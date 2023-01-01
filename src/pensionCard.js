@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { statePension } from "./pension";
 import PropTypes from "prop-types";
 
-const PensionCalulationCard = (props) => {
+const PensionCard = (props) => {
     const pension = Number(props.pension).toLocaleString("en");
     const statePensionPot = Number(props.pension + statePension).toLocaleString("en");
 
@@ -24,10 +24,10 @@ const PensionCalulationCard = (props) => {
     );
 };
 
-PensionCalulationCard.propTypes = {
+PensionCard.propTypes = {
     pension: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired
 };
 
-export default PensionCalulationCard;
+export default PensionCard;

@@ -60,17 +60,17 @@ test("get normal retirement age when 67 and EPA Pension is 65", () => {
     expect(pension.getEffectiveNormalRetirementAge()).toBe(65);
 });
 
-test("get the yearly pot growth when pensionalble earnings is 40000", () => {
+test("get the yearly pot growth when pensionable earnings is 40000", () => {
     let pension = new Pension({ pensionableEarnings: 40000 });
     expect(pension.getYearlyPensionPotGrowth()).toBe(928);
 });
 
-test("get the yearly pot growth when pensionalble earnings is 12000", () => {
+test("get the yearly pot growth when pensionable earnings is 12000", () => {
     let pension = new Pension({ pensionableEarnings: 12000 });
     expect(pension.getYearlyPensionPotGrowth()).toBe(278);
 });
 
-test("get the yearly pot growth when pensionalble earnings is 40000, with reduced hours of 66%", () => {
+test("get the yearly pot growth when pensionable earnings is 40000, with reduced hours of 66%", () => {
     let pension = new Pension({
         pensionableEarnings: 40000,
         reducedHoursPercentage: 66
@@ -78,7 +78,7 @@ test("get the yearly pot growth when pensionalble earnings is 40000, with reduce
     expect(pension.getYearlyPensionPotGrowth(true)).toBe(612);
 });
 
-test("get the yearly pot growth when pensionalble earnings is 12000, with reduced hours of 30%", () => {
+test("get the yearly pot growth when pensionable earnings is 12000, with reduced hours of 30%", () => {
     let pension = new Pension({
         pensionableEarnings: 12000,
         reducedHoursPercentage: 30
@@ -172,11 +172,11 @@ test("calculate pension when aged 36, pensionable earnings are £42342 with a pe
     expect(pension.calculatePensionNPAWithReducedHours()).toBe(25569);
 });
 
-test("calulate Added Pension For Year For Given Age when \
+test("calculate Added Pension For Year For Given Age when \
     aged 35, \
     added pension payments of £200 per month, therefore £2400 for the year\
     normal pension age of 68\
-    and pension typs is self+dependants", () => {
+    and pension type is self+dependants", () => {
     let pension = new Pension({
         normalPensionAge: 68,
         addedPensionType: "self+dependants"
@@ -185,11 +185,11 @@ test("calulate Added Pension For Year For Given Age when \
     expect(pension.calculateAddedPensionForYearForGivenAge(2400, 35)).toBe(259);
 });
 
-test("calulate Added Pension For Year For Given Age when \
+test("calculate Added Pension For Year For Given Age when \
     aged 45, \
     added pension payments of £100 per month, therefore £1200 for the year\
     normal pension age of 67\
-    and pension typs is self+dependants", () => {
+    and pension type is self+dependants", () => {
     let pension = new Pension({
         normalPensionAge: 67,
         addedPensionType: "self+dependants"
@@ -198,11 +198,11 @@ test("calulate Added Pension For Year For Given Age when \
     expect(pension.calculateAddedPensionForYearForGivenAge(1200, 45)).toBe(101);
 });
 
-test("calulate Added Pension For Year For Given Age when \
+test("calculate Added Pension For Year For Given Age when \
     aged 22, \
     added pension payments of £145 per month, therefore £1740 for the year\
     normal pension age of 68\
-    and pension typs is self", () => {
+    and pension type is self", () => {
     let pension = new Pension({
         normalPensionAge: 68
     });
@@ -214,7 +214,7 @@ test("calculate Added Pension For Multiple Years when \
     aged 60, \
     added pension payments of £100 per month\
     normal pension age of 67\
-    and pension typs is self", () => {
+    and pension type is self", () => {
     let pension = new Pension({
         age: 60,
         normalPensionAge: 67,
@@ -228,7 +228,7 @@ test("calculate Added Pension For Multiple Years when \
     aged 55, \
     added pension payments of £250 per month\
     normal pension age of 68\
-    and pension typs is self+dependants", () => {
+    and pension type is self+dependants", () => {
     let pension = new Pension({
         age: 55,
         normalPensionAge: 68,
@@ -243,7 +243,7 @@ test("calculate Added Pension For Multiple Years when \
     aged 55, \
     added pension payments of £250 per month\
     normal pension age of 68\
-    and pension typs is self+dependants\
+    and pension type is self+dependants\
     and retiring at 60", () => {
     let pension = new Pension({
         age: 55,
@@ -256,7 +256,7 @@ test("calculate Added Pension For Multiple Years when \
     expect(pension.calculateAddedPensionForMultipleYears(true)).toBe(1057);
 });
 
-// only testing once as this funciton is an composite function whose components have already been tested
+// only testing once as this function is an composite function whose components have already been tested
 test("calculate pension For NPA With Added Pension And Reduced Hours when:", () => {
     let pension = new Pension({
         age: 55,
@@ -272,7 +272,7 @@ test("calculate pension For NPA With Added Pension And Reduced Hours when:", () 
     expect(pension.calculatePensionNPAWithAddedPensionAndReducedHours()).toBe(6257);
 });
 
-// only testing once as this funciton is an composite function whose components have already been tested
+// only testing once as this function is an composite function whose components have already been tested
 test("calculate Pension NPA With Monthly Added Pension when:", () => {
     let pension = new Pension({
         age: 45,
@@ -286,7 +286,7 @@ test("calculate Pension NPA With Monthly Added Pension when:", () => {
     expect(pension.calculatePensionNPAWithMonthlyAddedPension()).toBe(20896);
 });
 
-// only testing once as this funciton is an composite function whose components have already been tested
+// only testing once as this function is an composite function whose components have already been tested
 test("calculate Pension For Early Retirement Monthly Added Pension when:", () => {
     let pension = new Pension({
         age: 33,

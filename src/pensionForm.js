@@ -9,14 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Slider from "@mui/material/Slider";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import PropTypes from "prop-types";
-
-function isNumeric(str) {
-    if (typeof str != "string") return false; // we only process strings!
-    return (
-        !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-        !isNaN(parseFloat(str))
-    ); // ...and ensure strings of whitespace fail
-}
+import isNumeric from "isnumeric";
 
 class PensionForm extends React.Component {
     constructor(props) {
