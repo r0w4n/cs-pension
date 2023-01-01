@@ -7,4 +7,5 @@
 !.yarn/versions
 node_modules
 coverage
+build
 .DS_Store
