@@ -1,7 +1,4 @@
-/**
- * @todo fix form ids
- */
-
+/* eslint-disable jsdoc/require-jsdoc */
 import * as React from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import Input from "@mui/material/Input";
@@ -22,10 +19,6 @@ function isNumeric(str) {
 }
 
 class PensionForm extends React.Component {
-    /**
-     *
-     * @param {object} props
-     */
     constructor(props) {
         super(props);
         this.onChange = props.onChange;
@@ -44,30 +37,31 @@ class PensionForm extends React.Component {
         this.onChange(this.form);
     };
 
-    /**
-     *
-     * @return string
-     */
     render() {
         return (
             <Grid container direction={"column"} spacing={1}>
-                <Grid item sx={{ mt: 2 }}>
+                <Grid sx={{ mt: 2 }} width="100%">
                     <InputLabel>Age</InputLabel>
                     <Slider name="age" value={this.form.age} min={16} max={70} step={1} valueLabelDisplay="on" onChange={this.handleChange} />
                 </Grid>
-                <Grid item>
-                    <InputLabel>Normal Pension Age</InputLabel>
+                <Grid width="100%">
+                    <InputLabel>
+                        <a href="https://www.gov.uk/state-pension-age" target="_blank" rel="noreferrer">
+                            Normal Pension Age
+                        </a>
+                    </InputLabel>
                     <Slider
                         name="normalPensionAge"
                         value={this.form.normalPensionAge}
                         min={65}
                         max={68}
                         step={1}
+                        marks
                         valueLabelDisplay="on"
                         onChange={this.handleChange}
                     />
                 </Grid>
-                <Grid item>
+                <Grid width="100%">
                     <InputLabel>Early Retirement Age</InputLabel>
                     <Slider
                         name="earlyRetirementAge"
@@ -79,7 +73,7 @@ class PensionForm extends React.Component {
                         onChange={this.handleChange}
                     />
                 </Grid>
-                <Grid item>
+                <Grid width="100%">
                     <InputLabel htmlFor="pension-pot">Current Pension Pot</InputLabel>
                     <FormControl fullWidth>
                         <Input
@@ -92,20 +86,20 @@ class PensionForm extends React.Component {
                         />
                     </FormControl>
                 </Grid>
-                <Grid item>
+                <Grid width="100%">
                     <InputLabel htmlFor="pensionable-earnings">Pensionable Earnings</InputLabel>
                     <FormControl fullWidth>
                         <Input
                             name="pensionableEarnings"
                             value={this.form.pensionableEarnings}
-                            id="standard-adornment-amount"
+                            id="pensionable-earnings"
                             startAdornment={<InputAdornment position="start">£</InputAdornment>}
                             type="number"
                             onChange={this.handleChange}
                         />
                     </FormControl>
                 </Grid>
-                <Grid item>
+                <Grid width="100%">
                     <InputLabel>Monthly Added Pension Payments(£)</InputLabel>
                     <Slider
                         name="monthlyAddedPensionPayment"
@@ -117,7 +111,7 @@ class PensionForm extends React.Component {
                         onChange={this.handleChange}
                     />
                 </Grid>
-                <Grid item>
+                <Grid width="100%">
                     <InputLabel id="addedPensionTypeInput">Added Pension Type</InputLabel>
                     <FormControl variant="standard" fullWidth>
                         <Select
@@ -132,7 +126,7 @@ class PensionForm extends React.Component {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item>
+                <Grid width="100%">
                     <InputLabel id="EPALabel">EPA</InputLabel>
                     <FormControl variant="standard" fullWidth>
                         <Select
@@ -150,7 +144,7 @@ class PensionForm extends React.Component {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item>
+                <Grid width="100%">
                     <InputLabel>Reduced Hours Age</InputLabel>
                     <Slider
                         name="reducedHoursAge"
@@ -162,7 +156,7 @@ class PensionForm extends React.Component {
                         onChange={this.handleChange}
                     />
                 </Grid>
-                <Grid item>
+                <Grid width="100%">
                     <InputLabel>Reduced Hours Percentage</InputLabel>
                     <Slider
                         name="reducedHoursPercentage"

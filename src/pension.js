@@ -7,23 +7,36 @@ const statePension = 9660;
 
 /**
  * Pension Calulation Class
- * @return {Pension}
- * @todo fix when reduced hours age is less that current age
+ *
+ * @returns {Pension}
  */
 class Pension {
     /**
      * @param {object} parameters
      */
-    constructor(parameters) {
+    constructor(
+        parameters = {
+            age: 0,
+            currentPensionPot: 0,
+            earlyRetirementAge: 0,
+            reducedHoursAge: 0,
+            normalPensionAge: 0,
+            monthlyAddedPensionPayment: 0,
+            addedPensionType: "self",
+            pensionableEarnings: 0,
+            EPAPension: 0,
+            reducedHoursPercentage: 0
+        }
+    ) {
         this.parameters = parameters;
     }
 
     /**
      * Calulates the pension for a normal age retirement
      *
-     * @return {integer}
+     * @returns {number}
      */
-    calculatepensionForNPA = () => {
+    calculatePensionNPA = () => {
         // number of years until retirement * yearly pension pot grown + existing pension pot
         return Math.round(this.getPensionableYears() * this.getYearlyPensionPotGrowth() + this.parameters.currentPensionPot);
     };
@@ -31,9 +44,9 @@ class Pension {
     /**
      * Calulates the pension for a normal age retirement with reduced hours
      *
-     * @return {integer}
+     * @returns {number}
      */
-    calculatepensionForNPAWithReducedHours = () => {
+    calculatePensionNPAWithReducedHours = () => {
         // number of years before reduced hours * yearly pension pot growth +
         // number of years between reduced hours and retirement * yearly pension pot growth (pro rata) +
         // current pension pot
@@ -45,29 +58,30 @@ class Pension {
         );
     };
 
-    calculatepensionForNPAWithAddedPensionAndReducedHours = () => {
-        // calculatepensionForNPAWithReducedHours +
-        // added pension of complete period
-
-        return Math.round(this.calculatepensionForNPAWithReducedHours() + this.calculateAddedPensionForMultipleYears());
-    };
-
     /**
      *
      * https://www.civilservicepensionscheme.org.uk/media/btmmnayj/alpha-added-pension-factors-and-guidance.pdf
-     * @param {*} parameters
-     * @return {number}
+     *
+     * @returns {number}
      */
     calculatePensionNPAWithMonthlyAddedPension = () => {
-        return Math.round(this.calculateAddedPensionForMultipleYears() + this.calculatepensionForNPA());
+        // calculate added pension for time period +
+        // calculate pension for NPA
+
+        return Math.round(this.calculateAddedPensionForMultipleYears() + this.calculatePensionNPA());
+    };
+
+    calculatePensionNPAWithAddedPensionAndReducedHours = () => {
+        // calculatePensionNPAWithReducedHours +
+        // added pension of complete period
+
+        return Math.round(this.calculatePensionNPAWithReducedHours() + this.calculateAddedPensionForMultipleYears());
     };
 
     /**
      *
      * @param {boolean} earlyRetirement
-     * @return {float}
-     *
-     * @todo unit test
+     * @returns {float}
      */
     calculateAddedPensionForMultipleYears = (earlyRetirement = false) => {
         let addedPensionPot = 0;
@@ -82,9 +96,9 @@ class Pension {
 
     /**
      *
-     * @param {integer} totalContributionsForPeriod
-     * @param {integer} age
-     * @return integer
+     * @param {number} totalContributionsForPeriod the total contributed amount of added pension for the year
+     * @param {number} age the age of the person for that year
+     * @returns {number} added pension pot for that year
      */
     calulateAddedPensionForYearForGivenAge = (totalContributionsForPeriod, age) => {
         return Math.round(
@@ -98,8 +112,7 @@ class Pension {
      *
      * Limitations: Does not take in to account the months therefore is only accurate to the whole year
      *
-     * @param {*} parameters
-     * @return {number}
+     * @returns {number}
      */
     calculatePensionForEarlyRetirement = () => {
         // calculate the number of years between age and early retirement
@@ -113,9 +126,9 @@ class Pension {
 
     /**
      *
-     * @return {integer}
+     * @returns {number}
      */
-    calculatepensionForEarlyRetirementMonthlyAddedPension = () => {
+    calculatePensionForEarlyRetirementMonthlyAddedPension = () => {
         return Math.round(this.calculateAddedPensionForMultipleYears(true) + this.calculatePensionForEarlyRetirement());
     };
 
@@ -144,8 +157,9 @@ class Pension {
 
     /**
      * Calculates the increase in pension pot size based on the yearly earnings and the pension accrual factor
+     *
      * @param {boolean} reducedHours
-     * @return {integer}
+     * @returns {integer}
      */
     getYearlyPensionPotGrowth = (reducedHours = false) => {
         let yearlyPensionPotGrowth = this.parameters.pensionableEarnings * pensionAccrualFactor;
@@ -161,7 +175,7 @@ class Pension {
      * Returns the number of pensionable years
      *
      * @param {boolean} earlyRetirement
-     * @return {integer}
+     * @returns {integer}
      */
     getPensionableYears = (earlyRetirement = false) => {
         if (earlyRetirement === true) {
@@ -175,7 +189,7 @@ class Pension {
      * Returns the age at which the parameters will retire.
      * This will either be the parameterss nornal retirement age (NRA) or their EPA Retirement age
      *
-     * @return {integer}
+     * @returns {integer}
      */
     getEffectiveNormalRetirementAge = () => {
         if (this.parameters.EPAPension > 0) {
@@ -187,7 +201,8 @@ class Pension {
 
     /**
      * https://www.civilservicepensionscheme.org.uk/media/oislhmme/early-and-late-retirement-factors-and-guidance-alpha.pdf
-     * @return {float}
+     *
+     * @returns {float}
      */
     getEarlyReductionFactors = () => {
         return earlyPaymentReductionFactors[this.getEffectiveNormalRetirementAge()][this.parameters.earlyRetirementAge];
@@ -196,7 +211,9 @@ class Pension {
     /**
      *
      * https://www.civilservicepensionscheme.org.uk/media/btmmnayj/alpha-added-pension-factors-and-guidance.pdf
-     * @return {float}
+     *
+     * @param age
+     * @returns {float}
      */
     getAddedPensionByPeriodicalContributionFactors = (age) => {
         let factorPart = addedPensionByPeriodicalContributionFactors[this.parameters.normalPensionAge][age];
@@ -207,23 +224,29 @@ class Pension {
     /**
      *
      * https://www.civilservicepensionscheme.org.uk/media/oislhmme/early-and-late-retirement-factors-and-guidance-alpha.pdf
+     *
      * @param {boolean} earlyRetirement
-     * @return {float}
+     * @param age
+     * @returns {float}
      */
     getAddedPensionRevaluationFactorByYears = (age) => {
         return addedPensionRevaluationFactorByYears[this.parameters.normalPensionAge - age].factor;
     };
 }
 
+/**
+ *
+ * @param parameters
+ */
 function calculatePensionPots(parameters) {
     const pension = new Pension(parameters);
     return {
-        pensionForNPA: pension.calculatepensionForNPA(),
+        pensionForNPA: pension.calculatePensionNPA(),
         pensionForNPAWithMonthlyAddedPension: pension.calculatePensionNPAWithMonthlyAddedPension(),
-        pensionForNPAWithReducedHours: pension.calculatepensionForNPAWithReducedHours(),
-        pensionForNPAWithAddedPensionAndReducedHours: pension.calculatepensionForNPAWithAddedPensionAndReducedHours(),
+        pensionForNPAWithReducedHours: pension.calculatePensionNPAWithReducedHours(),
+        pensionForNPAWithAddedPensionAndReducedHours: pension.calculatePensionNPAWithAddedPensionAndReducedHours(),
         pensionForEarlyRetirement: pension.calculatePensionForEarlyRetirement(),
-        pensionForEarlyRetirementMonthlyAddedPension: pension.calculatepensionForEarlyRetirementMonthlyAddedPension(),
+        pensionForEarlyRetirementMonthlyAddedPension: pension.calculatePensionForEarlyRetirementMonthlyAddedPension(),
         pensionForEarlyRetirementWithReducedHours: pension.calculatePensionForEarlyRetirementWithReducedHours(),
         pensionForEarlyRetirementWithAddedPensionReducedHours: pension.calculatePensionForEarlyRetirementWithAddedPensionReducedHours()
     };

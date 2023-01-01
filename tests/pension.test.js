@@ -8,7 +8,7 @@ test("calculate pension when aged 45, pensionable earnings are £30000 with a pe
         currentPensionPot: 1000,
         normalPensionAge: 67
     });
-    expect(pension.calculatepensionForNPA()).toBe(16312);
+    expect(pension.calculatePensionNPA()).toBe(16312);
 });
 
 test("calculate pension when aged 33, pensionable earnings are £40000 with a pension pot of £9000 and normal pension age of 68", () => {
@@ -18,7 +18,7 @@ test("calculate pension when aged 33, pensionable earnings are £40000 with a pe
         currentPensionPot: 9000,
         normalPensionAge: 68
     });
-    expect(pension.calculatepensionForNPA()).toBe(41480);
+    expect(pension.calculatePensionNPA()).toBe(41480);
 });
 
 test("calculate pension when aged 49, pensionable earnings are £40000 with a pension pot of £9000 and normal pension age of 67", () => {
@@ -28,9 +28,12 @@ test("calculate pension when aged 49, pensionable earnings are £40000 with a pe
         currentPensionPot: 0,
         normalPensionAge: 67
     });
-    expect(pension.calculatepensionForNPA()).toBe(16704);
+    expect(pension.calculatePensionNPA()).toBe(16704);
 });
 
+/**
+ * @todo double check
+ */
 test("calculate early retirement pension when aged 33, pensionable earnings are £40000 with a pension pot of £9000 and normal pension age of 55", () => {
     let pension = new Pension({
         age: 33,
@@ -142,7 +145,7 @@ test("calculate pension when aged 45, pensionable earnings are £40000 with a pe
         reducedHoursAge: 50,
         reducedHoursPercentage: 50
     });
-    expect(pension.calculatepensionForNPAWithReducedHours()).toBe(12528);
+    expect(pension.calculatePensionNPAWithReducedHours()).toBe(12528);
 });
 
 test("calculate pension when aged 30, pensionable earnings are £30000 with a pension pot of £1000 and normal pension age of 67, reducing hours at 45 to 30%", () => {
@@ -154,7 +157,7 @@ test("calculate pension when aged 30, pensionable earnings are £30000 with a pe
         reducedHoursAge: 45,
         reducedHoursPercentage: 30
     });
-    expect(pension.calculatepensionForNPAWithReducedHours()).toBe(16038);
+    expect(pension.calculatePensionNPAWithReducedHours()).toBe(16038);
 });
 
 test("calculate pension when aged 36, pensionable earnings are £42342 with a pension pot of £5345 and normal pension age of 68, reducing hours at 48 to 43%", () => {
@@ -166,7 +169,7 @@ test("calculate pension when aged 36, pensionable earnings are £42342 with a pe
         reducedHoursAge: 48,
         reducedHoursPercentage: 43
     });
-    expect(pension.calculatepensionForNPAWithReducedHours()).toBe(25569);
+    expect(pension.calculatePensionNPAWithReducedHours()).toBe(25569);
 });
 
 test("calulate Added Pension For Year For Given Age when \
@@ -253,17 +256,48 @@ test("calculate Added Pension For Multiple Years when \
     expect(pension.calculateAddedPensionForMultipleYears(true)).toBe(1057);
 });
 
-// test("calulate Added Pension For Year For Given Age when \
-//     aged 60, \
-//     added pension payments of £100 per month, therefore £1200 for the year\
-//     normal pension age of 68\
-//     and pension typs is self", () => {
-//     let pension = new Pension({
-//         age: 36,
-//         pensionableEarnings: 30000,
-//         currentPensionPot: 0,
-//         normalPensionAge: 68
-//     });
+// only testing once as this funciton is an composite function whose components have already been tested
+test("calculate pension For NPA With Added Pension And Reduced Hours when:", () => {
+    let pension = new Pension({
+        age: 55,
+        pensionableEarnings: 40000,
+        currentPensionPot: 0,
+        normalPensionAge: 68,
+        reducedHoursAge: 50,
+        reducedHoursPercentage: 50,
+        monthlyAddedPensionPayment: 250,
+        addedPensionType: "self+dependants"
+    });
 
-//     expect(pension.calculatePensionNPAWithMonthlyAddedPension()).toBe(268);
-// });
+    expect(pension.calculatePensionNPAWithAddedPensionAndReducedHours()).toBe(6257);
+});
+
+// only testing once as this funciton is an composite function whose components have already been tested
+test("calculate Pension NPA With Monthly Added Pension when:", () => {
+    let pension = new Pension({
+        age: 45,
+        pensionableEarnings: 30000,
+        currentPensionPot: 1000,
+        normalPensionAge: 67,
+        monthlyAddedPensionPayment: 250,
+        addedPensionType: "self+dependants"
+    });
+
+    expect(pension.calculatePensionNPAWithMonthlyAddedPension()).toBe(20896);
+});
+
+// only testing once as this funciton is an composite function whose components have already been tested
+test("calculate Pension For Early Retirement Monthly Added Pension when:", () => {
+    let pension = new Pension({
+        age: 33,
+        pensionableEarnings: 40000,
+        currentPensionPot: 9000,
+        earlyRetirementAge: 55,
+        normalPensionAge: 67,
+        monthlyAddedPensionPayment: 250,
+        addedPensionType: "self+dependants"
+    });
+    expect(pension.calculatePensionForEarlyRetirementMonthlyAddedPension()).toBe(21925);
+});
+
+// calculatePensionForEarlyRetirementWithReducedHours

@@ -47,6 +47,7 @@
     "eslint-config-google": "latest",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jest": "^27.1.7",
+    "eslint-plugin-jsdoc": "^39.6.4",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "latest",
     "jest": "^29.3.1",

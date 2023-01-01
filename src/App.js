@@ -1,9 +1,10 @@
+/* eslint-disable jsdoc/require-jsdoc */
 /**
- * TODO lumpsum added pension calculation
+ * @todo lumpsum added pension calculation
+ * @todo EPA testing and work with NPA calculations
  */
 
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,11 +16,8 @@ import "typeface-roboto";
 
 import { calculatePensionPots } from "./pension";
 import PensionForm from "./pensionForm";
-import PensionCalulationCard from "./pensionCard";
-
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
+import NPACards from "./npaCards";
+import EarlyRetirementCards from "./earlyRetirementCards";
 
 function App() {
     const initialPensionFormState = JSON.parse(window.localStorage.getItem("form")) || {
@@ -36,7 +34,6 @@ function App() {
     };
 
     const [cardData, setCardData] = useState(calculatePensionPots(initialPensionFormState));
-
     const handleCallback = (form) => {
         setCardData(calculatePensionPots(form));
         localStorage.setItem("form", JSON.stringify(form));
@@ -68,108 +65,28 @@ function App() {
             <CssBaseline />
             <ThemeProvider theme={THEME}>
                 <Container maxWidth="lg">
-                    <Box sx={{ flexGrow: 1 }}>
-                        <AppBar position="static" sx={{ backgroundColor: "primary.light" }}>
-                            <Toolbar>
-                                <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
-                                    Civil Service Alpha Pension Calculator
-                                </Typography>
-                            </Toolbar>
-                        </AppBar>
-                        <Grid container spacing={2}>
-                            <Grid item xs={4}>
-                                <PensionForm initialState={initialPensionFormState} onChange={handleCallback} />
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Grid container direction={"column"}>
-                                    <Grid item>
-                                        <Card sx={{ p: -1 }}>
-                                            <Box
-                                                sx={{
-                                                    backgroundColor: "primary.light"
-                                                }}>
-                                                <CardHeader sx={{ p: 1 }} title="Retiring at Normal Pension Age" align="center" />
-                                            </Box>
-                                            <CardContent sx={{ m: -2 }}>
-                                                <Grid container spacing={1}>
-                                                    <Grid item xs={3}>
-                                                        <PensionCalulationCard
-                                                            title="Your annual pension is"
-                                                            subtitle="including state pension"
-                                                            pension={cardData.pensionForNPA}
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={3}>
-                                                        <PensionCalulationCard
-                                                            title="Your annual pension with added pension is"
-                                                            subtitle="including state pension"
-                                                            pension={cardData.pensionForNPAWithMonthlyAddedPension}
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={3}>
-                                                        <PensionCalulationCard
-                                                            title="Your annual pension with reduced hours is"
-                                                            subtitle="including state pension"
-                                                            pension={cardData.pensionForNPAWithReducedHours}
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={3}>
-                                                        <PensionCalulationCard
-                                                            title="Your annual pension with reduced hours and added pension is"
-                                                            subtitle="including state pension"
-                                                            pension={cardData.pensionForNPAWithAddedPensionAndReducedHours}
-                                                        />
-                                                    </Grid>
-                                                </Grid>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                    <Grid item>
-                                        <Card sx={{ p: -1 }}>
-                                            <Box
-                                                sx={{
-                                                    backgroundColor: "primary.light"
-                                                }}>
-                                                <CardHeader sx={{ p: 1 }} title="Retiring Early" align="center" />
-                                            </Box>
-                                            <CardContent sx={{ m: -2 }}>
-                                                <Grid container spacing={1}>
-                                                    <Grid item xs={3}>
-                                                        <PensionCalulationCard
-                                                            title="Your annual early retirement pension is"
-                                                            subtitle="including state pension (at NPA)"
-                                                            pension={cardData.pensionForEarlyRetirement}
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={3}>
-                                                        <PensionCalulationCard
-                                                            title="Your annual early retirement pension with added pension is"
-                                                            subtitle="including state pension (at NPA)"
-                                                            pension={cardData.pensionForEarlyRetirementMonthlyAddedPension}
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={3}>
-                                                        <PensionCalulationCard
-                                                            title="Your annual early retirement pension with reduced hours is"
-                                                            subtitle="including state pension"
-                                                            pension={cardData.pensionForEarlyRetirementWithReducedHours}
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={3}>
-                                                        <PensionCalulationCard
-                                                            title="Your annual early retirement pension with reduced hours and added pension is"
-                                                            subtitle="including state pension"
-                                                            pension={cardData.pensionForEarlyRetirementWithAddedPensionReducedHours}
-                                                        />
-                                                    </Grid>
-                                                </Grid>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
+                    <AppBar position="static" sx={{ backgroundColor: "primary.light" }}>
+                        <Toolbar>
+                            <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
+                                Civil Service Alpha Pension Calculator
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
+                    <Grid container spacing={2}>
+                        <Grid xs={12} sm={5} md={4} lg={4}>
+                            <PensionForm initialState={initialPensionFormState} onChange={handleCallback} />
+                        </Grid>
+                        <Grid xs={12} sm={7} md={8} lg={8}>
+                            <Grid>
+                                <Grid>
+                                    <NPACards data={cardData} />
+                                </Grid>
+                                <Grid>
+                                    <EarlyRetirementCards data={cardData} />
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Box>
+                    </Grid>
                 </Container>
             </ThemeProvider>
         </React.Fragment>
