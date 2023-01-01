@@ -182,7 +182,7 @@ test("calulate Added Pension For Year For Given Age when \
         addedPensionType: "self+dependants"
     });
 
-    expect(pension.calulateAddedPensionForYearForGivenAge(2400, 35)).toBe(259);
+    expect(pension.calculateAddedPensionForYearForGivenAge(2400, 35)).toBe(259);
 });
 
 test("calulate Added Pension For Year For Given Age when \
@@ -195,7 +195,7 @@ test("calulate Added Pension For Year For Given Age when \
         addedPensionType: "self+dependants"
     });
 
-    expect(pension.calulateAddedPensionForYearForGivenAge(1200, 45)).toBe(101);
+    expect(pension.calculateAddedPensionForYearForGivenAge(1200, 45)).toBe(101);
 });
 
 test("calulate Added Pension For Year For Given Age when \
@@ -207,7 +207,7 @@ test("calulate Added Pension For Year For Given Age when \
         normalPensionAge: 68
     });
 
-    expect(pension.calulateAddedPensionForYearForGivenAge(1740, 22)).toBe(268);
+    expect(pension.calculateAddedPensionForYearForGivenAge(1740, 22)).toBe(268);
 });
 
 test("calculate Added Pension For Multiple Years when \

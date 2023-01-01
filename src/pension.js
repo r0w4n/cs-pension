@@ -6,7 +6,7 @@ const pensionAccrualFactor = 0.0232;
 const statePension = 9660;
 
 /**
- * Pension Calulation Class
+ * Pension Calculation Class
  *
  * @returns {Pension}
  */
@@ -32,7 +32,7 @@ class Pension {
     }
 
     /**
-     * Calulates the pension for a normal age retirement
+     * Calculates the pension for a normal age retirement
      *
      * @returns {number}
      */
@@ -42,7 +42,7 @@ class Pension {
     };
 
     /**
-     * Calulates the pension for a normal age retirement with reduced hours
+     * Calculates the pension for a normal age retirement with reduced hours
      *
      * @returns {number}
      */
@@ -88,7 +88,7 @@ class Pension {
         let totalContributionsForYear = 12 * this.parameters.monthlyAddedPensionPayment;
         let retirementAge = earlyRetirement === true ? this.parameters.earlyRetirementAge : this.parameters.normalPensionAge;
         for (let age = this.parameters.age; age < retirementAge; age++) {
-            addedPensionPot += this.calulateAddedPensionForYearForGivenAge(totalContributionsForYear, age);
+            addedPensionPot += this.calculateAddedPensionForYearForGivenAge(totalContributionsForYear, age);
         }
 
         return addedPensionPot;
@@ -100,7 +100,7 @@ class Pension {
      * @param {number} age the age of the person for that year
      * @returns {number} added pension pot for that year
      */
-    calulateAddedPensionForYearForGivenAge = (totalContributionsForPeriod, age) => {
+    calculateAddedPensionForYearForGivenAge = (totalContributionsForPeriod, age) => {
         return Math.round(
             totalContributionsForPeriod / (this.getAddedPensionByPeriodicalContributionFactors(age) * this.getAddedPensionRevaluationFactorByYears(age))
         );
@@ -108,7 +108,7 @@ class Pension {
 
     /**
      * Calculates the size of the pot by the time they get to early retirement age then
-     * mutiply by the Early Reduction Factor
+     * multiply by the Early Reduction Factor
      *
      * Limitations: Does not take in to account the months therefore is only accurate to the whole year
      *
@@ -187,7 +187,7 @@ class Pension {
 
     /**
      * Returns the age at which the parameters will retire.
-     * This will either be the parameterss nornal retirement age (NRA) or their EPA Retirement age
+     * This will either be the parameters normal retirement age (NRA) or their EPA Retirement age
      *
      * @returns {integer}
      */

@@ -1,6 +1,6 @@
 /* eslint-disable jsdoc/require-jsdoc */
 /**
- * @todo lumpsum added pension calculation
+ * @todo lump sum added pension calculation
  * @todo EPA testing and work with NPA calculations
  */
 
