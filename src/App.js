@@ -6,18 +6,17 @@
 
 import React, { useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
-import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
+
 import { ThemeProvider, createTheme } from "@mui/material//styles";
 import "typeface-roboto";
 
 import { calculatePensionPots } from "./pension";
-import PensionForm from "./pensionForm";
-import NPACards from "./npaCards";
-import EarlyRetirementCards from "./earlyRetirementCards";
+import PensionForm from "./components/PensionForm";
+import NPACards from "./components/NpaCards";
+import EarlyRetirementCards from "./components/EarlyRetirementCards";
+import MenuHeader from "./components/MenuHeader";
 
 function App() {
     const initialPensionFormState = JSON.parse(window.localStorage.getItem("form")) || {
@@ -65,25 +64,17 @@ function App() {
             <CssBaseline />
             <ThemeProvider theme={THEME}>
                 <Container maxWidth="lg">
-                    <AppBar position="static" sx={{ backgroundColor: "primary.light" }}>
-                        <Toolbar>
-                            <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
-                                Civil Service Alpha Pension Calculator
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
+                    <MenuHeader />
                     <Grid container spacing={2}>
                         <Grid xs={12} sm={5} md={4} lg={4}>
                             <PensionForm initialState={initialPensionFormState} onChange={handleCallback} />
                         </Grid>
                         <Grid xs={12} sm={7} md={8} lg={8}>
                             <Grid>
-                                <Grid>
-                                    <NPACards data={cardData} />
-                                </Grid>
-                                <Grid>
-                                    <EarlyRetirementCards data={cardData} />
-                                </Grid>
+                                <NPACards data={cardData} />
+                            </Grid>
+                            <Grid>
+                                <EarlyRetirementCards data={cardData} />
                             </Grid>
                         </Grid>
                     </Grid>

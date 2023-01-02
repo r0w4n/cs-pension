@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import "typeface-roboto";
 
-import PensionCard from "./pensionCard";
+import PensionCard from "./PensionCard";
 
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
