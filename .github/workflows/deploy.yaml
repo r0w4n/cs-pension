@@ -1,7 +1,9 @@
 name: Deploy
-on: push
+description: deploys to github pages
+on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
