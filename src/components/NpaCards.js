@@ -48,7 +48,12 @@ const NPACards = (props) => {
 };
 
 NPACards.propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.shape({
+        pensionForNPAWithAddedPensionAndReducedHours: PropTypes.number.isRequired,
+        pensionForNPAWithReducedHours: PropTypes.number.isRequired,
+        pensionForNPAWithAddedPension: PropTypes.number.isRequired,
+        pensionForNPA: PropTypes.number.isRequired
+    })
 };
 
 export default NPACards;

@@ -158,7 +158,18 @@ class PensionForm extends React.Component {
 
 PensionForm.propTypes = {
     onChange: PropTypes.func.isRequired,
-    initialState: PropTypes.object.isRequired
+    initialState: PropTypes.shape({
+        age: PropTypes.number.isRequired,
+        currentPensionPot: PropTypes.number.isRequired,
+        earlyRetirementAge: PropTypes.number.isRequired,
+        monthlyAddedPensionPayment: PropTypes.number.isRequired,
+        normalPensionAge: PropTypes.number.isRequired,
+        addedPensionType: PropTypes.string.isRequired,
+        pensionableEarnings: PropTypes.number.isRequired,
+        EPAPension: PropTypes.number.isRequired,
+        reducedHoursAge: PropTypes.number.isRequired,
+        reducedHoursPercentage: PropTypes.number.isRequired
+    })
 };
 
 export default PensionForm;

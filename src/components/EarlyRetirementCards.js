@@ -52,7 +52,12 @@ const EarlyRetirementCards = (props) => {
 };
 
 EarlyRetirementCards.propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.shape({
+        pensionForEarlyRetirementWithAddedPensionReducedHours: PropTypes.number.isRequired,
+        pensionForEarlyRetirementWithReducedHours: PropTypes.number.isRequired,
+        pensionForEarlyRetirementWithAddedPension: PropTypes.number.isRequired,
+        pensionForEarlyRetirement: PropTypes.number.isRequired
+    })
 };
 
 export default EarlyRetirementCards;
