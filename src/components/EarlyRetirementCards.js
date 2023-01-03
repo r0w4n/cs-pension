@@ -34,14 +34,14 @@ const EarlyRetirementCards = (props) => {
                     <Grid xs={12} sm={6} lg={3}>
                         <PensionCard
                             title="Your annual early retirement pension with reduced hours is"
-                            subtitle="including state pension"
+                            subtitle="including state pension (at NPA)"
                             pension={cardData.pensionForEarlyRetirementWithReducedHours}
                         />
                     </Grid>
                     <Grid xs={12} sm={6} lg={3}>
                         <PensionCard
                             title="Your annual early retirement pension with reduced hours and added pension is"
-                            subtitle="including state pension"
+                            subtitle="including state pension (at NPA)"
                             pension={cardData.pensionForEarlyRetirementWithAddedPensionReducedHours}
                         />
                     </Grid>
