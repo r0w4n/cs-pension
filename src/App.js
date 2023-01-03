@@ -7,7 +7,7 @@ import { useState, React } from "react";
 import { ThemeProvider, createTheme, CssBaseline, Container, Unstable_Grid2 as Grid } from "@mui/material/";
 import "typeface-roboto";
 
-import calculatePensionPots from "./pension";
+import { calculatePensionPots } from "./pension";
 import PensionForm from "./components/PensionForm";
 import NPACards from "./components/NpaCards";
 import EarlyRetirementCards from "./components/EarlyRetirementCards";

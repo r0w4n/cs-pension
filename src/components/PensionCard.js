@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardContent, Typography } from "@mui/material";
-import statePension from "../pension";
+import { statePension } from "../pension";
 import PropTypes from "prop-types";
 
 const PensionCard = (props) => {
