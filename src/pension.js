@@ -59,18 +59,24 @@ class Pension {
     };
 
     /**
+     * Calculates the pension at normal pension age with monthly added pension
      *
      * https://www.civilservicepensionscheme.org.uk/media/btmmnayj/alpha-added-pension-factors-and-guidance.pdf
      *
      * @returns {number}
      */
-    calculatePensionNPAWithMonthlyAddedPension = () => {
+    calculatePensionNPAWithAddedPension = () => {
         // calculate added pension for time period +
         // calculate pension for NPA
 
         return Math.round(this.calculateAddedPensionForMultipleYears() + this.calculatePensionNPA());
     };
 
+    /**
+     * Calculates pension at normal pension age with added pension and reduced hours
+     *
+     * @returns {number}
+     */
     calculatePensionNPAWithAddedPensionAndReducedHours = () => {
         // calculatePensionNPAWithReducedHours +
         // added pension of complete period
@@ -79,6 +85,7 @@ class Pension {
     };
 
     /**
+     * Calculates added pension for multiple years
      *
      * @param {boolean} earlyRetirement
      * @returns {float}
@@ -95,6 +102,7 @@ class Pension {
     };
 
     /**
+     * Calculates added pension for the whole year for a given age
      *
      * @param {number} totalContributionsForPeriod the total contributed amount of added pension for the year
      * @param {number} age the age of the person for that year
@@ -125,13 +133,19 @@ class Pension {
     };
 
     /**
+     * Calculates pension for early retirement with monthly added pension
      *
      * @returns {number}
      */
-    calculatePensionForEarlyRetirementMonthlyAddedPension = () => {
+    calculatePensionForEarlyRetirementWithAddedPension = () => {
         return Math.round(this.calculateAddedPensionForMultipleYears(true) + this.calculatePensionForEarlyRetirement());
     };
 
+    /**
+     * Calculates pension for early retirement with reduced hours
+     *
+     * @returns {number}
+     */
     calculatePensionForEarlyRetirementWithReducedHours = () => {
         // number of years before reduced hours * yearly pension pot growth +
         // number of years between reduced hours and retirement * yearly pension pot growth (pro rata) +
@@ -148,6 +162,11 @@ class Pension {
         );
     };
 
+    /**
+     * Calculates pension for early retirement with monthly added pension and reduced hours
+     *
+     * @returns {number}
+     */
     calculatePensionForEarlyRetirementWithAddedPensionReducedHours = () => {
         // calculatePensionForEarlyRetirementWithReducedHours +
         // added pension of complete period
@@ -209,10 +228,11 @@ class Pension {
     };
 
     /**
+     * Gets the added pension by periodical contribution factors
      *
      * https://www.civilservicepensionscheme.org.uk/media/btmmnayj/alpha-added-pension-factors-and-guidance.pdf
      *
-     * @param age
+     * @param {age}
      * @returns {float}
      */
     getAddedPensionByPeriodicalContributionFactors = (age) => {
@@ -222,11 +242,11 @@ class Pension {
     };
 
     /**
+     * Gets the added pension revaluation factor by years
      *
      * https://www.civilservicepensionscheme.org.uk/media/oislhmme/early-and-late-retirement-factors-and-guidance-alpha.pdf
      *
-     * @param {boolean} earlyRetirement
-     * @param age
+     * @param {age}
      * @returns {float}
      */
     getAddedPensionRevaluationFactorByYears = (age) => {
@@ -235,18 +255,19 @@ class Pension {
 }
 
 /**
+ * Calculates all of the different pension calculations
  *
- * @param parameters
+ * @param {parameters}
  */
 function calculatePensionPots(parameters) {
     const pension = new Pension(parameters);
     return {
         pensionForNPA: pension.calculatePensionNPA(),
-        pensionForNPAWithMonthlyAddedPension: pension.calculatePensionNPAWithMonthlyAddedPension(),
+        pensionForNPAWithAddedPension: pension.calculatePensionNPAWithAddedPension(),
         pensionForNPAWithReducedHours: pension.calculatePensionNPAWithReducedHours(),
         pensionForNPAWithAddedPensionAndReducedHours: pension.calculatePensionNPAWithAddedPensionAndReducedHours(),
         pensionForEarlyRetirement: pension.calculatePensionForEarlyRetirement(),
-        pensionForEarlyRetirementMonthlyAddedPension: pension.calculatePensionForEarlyRetirementMonthlyAddedPension(),
+        pensionForEarlyRetirementWithAddedPension: pension.calculatePensionForEarlyRetirementWithAddedPension(),
         pensionForEarlyRetirementWithReducedHours: pension.calculatePensionForEarlyRetirementWithReducedHours(),
         pensionForEarlyRetirementWithAddedPensionReducedHours: pension.calculatePensionForEarlyRetirementWithAddedPensionReducedHours()
     };

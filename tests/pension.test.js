@@ -283,7 +283,7 @@ test("calculate Pension NPA With Monthly Added Pension when:", () => {
         addedPensionType: "self+dependants"
     });
 
-    expect(pension.calculatePensionNPAWithMonthlyAddedPension()).toBe(20896);
+    expect(pension.calculatePensionNPAWithAddedPension()).toBe(20896);
 });
 
 // only testing once as this function is an composite function whose components have already been tested
@@ -297,7 +297,7 @@ test("calculate Pension For Early Retirement Monthly Added Pension when:", () =>
         monthlyAddedPensionPayment: 250,
         addedPensionType: "self+dependants"
     });
-    expect(pension.calculatePensionForEarlyRetirementMonthlyAddedPension()).toBe(21925);
+    expect(pension.calculatePensionForEarlyRetirementWithAddedPension()).toBe(21925);
 });
 
 // calculatePensionForEarlyRetirementWithReducedHours

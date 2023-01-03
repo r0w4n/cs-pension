@@ -1,22 +1,17 @@
-/* eslint-disable jsdoc/require-jsdoc */
 /**
  * @todo lump sum added pension calculation
  * @todo EPA testing and work with NPA calculations
  */
 
-import React, { useState } from "react";
-import Grid from "@mui/material/Unstable_Grid2";
-import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
-
-import { ThemeProvider, createTheme } from "@mui/material//styles";
+import { useState, React } from "react";
+import { ThemeProvider, createTheme, CssBaseline, Container, Unstable_Grid2 as Grid } from "@mui/material/";
 import "typeface-roboto";
 
-import { calculatePensionPots } from "./pension";
+import calculatePensionPots from "./pension";
 import PensionForm from "./components/PensionForm";
 import NPACards from "./components/NpaCards";
 import EarlyRetirementCards from "./components/EarlyRetirementCards";
-import MenuHeader from "./components/MenuHeader";
+import AppBar from "./components/AppBar";
 
 function App() {
     const initialPensionFormState = JSON.parse(window.localStorage.getItem("form")) || {
@@ -60,11 +55,11 @@ function App() {
     });
 
     return (
-        <React.Fragment>
-            <CssBaseline />
+        <>
             <ThemeProvider theme={THEME}>
+                <CssBaseline />
                 <Container maxWidth="lg">
-                    <MenuHeader />
+                    <AppBar />
                     <Grid container spacing={2}>
                         <Grid xs={12} sm={5} md={4} lg={4}>
                             <PensionForm initialState={initialPensionFormState} onChange={handleCallback} />
@@ -80,7 +75,7 @@ function App() {
                     </Grid>
                 </Container>
             </ThemeProvider>
-        </React.Fragment>
+        </>
     );
 }
 

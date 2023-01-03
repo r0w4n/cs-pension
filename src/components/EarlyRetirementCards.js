@@ -1,13 +1,8 @@
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Unstable_Grid2";
+import { Box, Unstable_Grid2 as Grid, Card, CardHeader, CardContent } from "@mui/material";
 import "typeface-roboto";
+import PropTypes from "prop-types";
 
 import PensionCard from "./PensionCard";
-
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import PropTypes from "prop-types";
 
 const EarlyRetirementCards = (props) => {
     const cardData = props.data;
@@ -33,7 +28,7 @@ const EarlyRetirementCards = (props) => {
                         <PensionCard
                             title="Your annual early retirement pension with added pension is"
                             subtitle="including state pension (at NPA)"
-                            pension={cardData.pensionForEarlyRetirementMonthlyAddedPension}
+                            pension={cardData.pensionForEarlyRetirementWithAddedPension}
                         />
                     </Grid>
                     <Grid xs={12} sm={6} lg={3}>
