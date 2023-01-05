@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, Select, MenuItem, Slider, InputLabel, Input, InputAdornment, Unstable_Grid2 as Grid } from "@mui/material";
+import { TextField, Autocomplete, FormControl, Select, MenuItem, Slider, InputLabel, Input, InputAdornment, Unstable_Grid2 as Grid } from "@mui/material";
 import PropTypes from "prop-types";
 import isNumeric from "isnumeric";
 
@@ -8,151 +8,311 @@ class PensionForm extends React.Component {
         super(props);
         this.onChange = props.onChange;
         this.form = props.initialState;
+        this.isMobile = props.isMobile;
     }
+
+    shouldComponentUpdate = (nextProps) => {
+        this.isMobile = nextProps.isMobile;
+        return true;
+    };
 
     handleChange = (event) => {
         const { name, value } = event.target;
 
         this.form[name] = isNumeric(value) ? +value : value;
-
         this.onChange(this.form);
     };
 
     render() {
-        return (
-            <form>
-                <Grid container direction={"column"} spacing={1}>
-                    <Grid sx={{ mt: 2 }} width="100%">
-                        <InputLabel>Age</InputLabel>
-                        <Slider name="age" value={this.form.age} min={16} max={70} step={1} valueLabelDisplay="on" onChange={this.handleChange} />
-                    </Grid>
-                    <Grid width="100%">
-                        <InputLabel>
-                            <a href="https://www.gov.uk/state-pension-age" target="_blank" rel="noreferrer">
-                                Normal Pension Age
-                            </a>
-                        </InputLabel>
-                        <Slider
-                            name="normalPensionAge"
-                            value={this.form.normalPensionAge}
-                            min={65}
-                            max={68}
-                            step={1}
-                            marks
-                            valueLabelDisplay="on"
-                            onChange={this.handleChange}
-                        />
-                    </Grid>
-                    <Grid width="100%">
-                        <InputLabel>Early Retirement Age</InputLabel>
-                        <Slider
-                            name="earlyRetirementAge"
-                            value={this.form.earlyRetirementAge}
-                            min={55}
-                            max={70}
-                            step={1}
-                            valueLabelDisplay="on"
-                            onChange={this.handleChange}
-                        />
-                    </Grid>
-                    <Grid width="100%">
-                        <InputLabel htmlFor="pension-pot">Current Pension Pot</InputLabel>
-                        <FormControl fullWidth>
-                            <Input
-                                name="currentPensionPot"
-                                value={this.form.currentPensionPot}
-                                id="pension-pot"
-                                startAdornment={<InputAdornment position="start">£</InputAdornment>}
-                                type="number"
+        if (!this.isMobile) {
+            return (
+                <form>
+                    <Grid container direction={"column"} spacing={1}>
+                        <Grid sx={{ mt: 2 }} width="100%">
+                            <InputLabel>Age</InputLabel>
+                            <Slider name="age" value={this.form.age} min={16} max={70} step={1} valueLabelDisplay="on" onChange={this.handleChange} />
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel>
+                                <a href="https://www.gov.uk/state-pension-age" target="_blank" rel="noreferrer">
+                                    Normal Pension Age
+                                </a>
+                            </InputLabel>
+                            <Slider
+                                name="normalPensionAge"
+                                value={this.form.normalPensionAge}
+                                min={65}
+                                max={68}
+                                step={1}
+                                marks
+                                valueLabelDisplay="on"
                                 onChange={this.handleChange}
                             />
-                        </FormControl>
-                    </Grid>
-                    <Grid width="100%">
-                        <InputLabel htmlFor="pensionable-earnings">Pensionable Earnings</InputLabel>
-                        <FormControl fullWidth>
-                            <Input
-                                name="pensionableEarnings"
-                                value={this.form.pensionableEarnings}
-                                id="pensionable-earnings"
-                                startAdornment={<InputAdornment position="start">£</InputAdornment>}
-                                type="number"
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel>Early Retirement Age</InputLabel>
+                            <Slider
+                                name="earlyRetirementAge"
+                                value={this.form.earlyRetirementAge}
+                                min={55}
+                                max={70}
+                                step={1}
+                                valueLabelDisplay="on"
                                 onChange={this.handleChange}
                             />
-                        </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel htmlFor="currentPensionPot">Current Pension Pot</InputLabel>
+                            <FormControl fullWidth>
+                                <Input
+                                    name="currentPensionPot"
+                                    value={this.form.currentPensionPot}
+                                    id="currentPensionPot"
+                                    startAdornment={<InputAdornment position="start">£</InputAdornment>}
+                                    type="number"
+                                    onChange={this.handleChange}
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel htmlFor="pensionable-earnings">Pensionable Earnings</InputLabel>
+                            <FormControl fullWidth>
+                                <Input
+                                    name="pensionableEarnings"
+                                    value={this.form.pensionableEarnings}
+                                    id="pensionable-earnings"
+                                    startAdornment={<InputAdornment position="start">£</InputAdornment>}
+                                    type="number"
+                                    onChange={this.handleChange}
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel>Monthly Added Pension Payments(£)</InputLabel>
+                            <Slider
+                                name="monthlyAddedPensionPayment"
+                                value={this.form.monthlyAddedPensionPayment}
+                                min={0}
+                                max={2000}
+                                step={10}
+                                valueLabelDisplay="on"
+                                onChange={this.handleChange}
+                            />
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel id="addedPensionTypeInput">Added Pension Type</InputLabel>
+                            <FormControl variant="standard" fullWidth>
+                                <Select
+                                    name="addedPensionType"
+                                    value={this.form.addedPensionType}
+                                    labelId="addedPensionTypeInput"
+                                    id="demo-simple-select"
+                                    label="Added Pension Type"
+                                    onChange={this.handleChange}>
+                                    <MenuItem value="self">Self</MenuItem>
+                                    <MenuItem value="self+dependants">Self & Dependants</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel id="EPALabel">EPA</InputLabel>
+                            <FormControl variant="standard" fullWidth>
+                                <Select
+                                    name="EPAPension"
+                                    value={this.form.EPAPension}
+                                    labelId="EPALabel"
+                                    id="EPAPension"
+                                    label="Added Pension Type"
+                                    onChange={this.handleChange}>
+                                    <MenuItem value="0">No EPA</MenuItem>
+                                    <MenuItem value="65">65</MenuItem>
+                                    <MenuItem value="66">66</MenuItem>
+                                    <MenuItem value="67">67</MenuItem>
+                                    <MenuItem value="68">68</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel>Reduced Hours Age</InputLabel>
+                            <Slider
+                                name="reducedHoursAge"
+                                value={this.form.reducedHoursAge}
+                                min={30}
+                                max={65}
+                                step={1}
+                                valueLabelDisplay="on"
+                                onChange={this.handleChange}
+                            />
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel>Reduced Hours Percentage</InputLabel>
+                            <Slider
+                                name="reducedHoursPercentage"
+                                value={this.form.reducedHoursPercentage}
+                                min={0}
+                                max={100}
+                                step={1}
+                                valueLabelDisplay="on"
+                                onChange={this.handleChange}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid width="100%">
-                        <InputLabel>Monthly Added Pension Payments(£)</InputLabel>
-                        <Slider
-                            name="monthlyAddedPensionPayment"
-                            value={this.form.monthlyAddedPensionPayment}
-                            min={0}
-                            max={2000}
-                            step={10}
-                            valueLabelDisplay="on"
-                            onChange={this.handleChange}
-                        />
+                </form>
+            );
+        } else {
+            return (
+                <form>
+                    <Grid container direction={"column"} spacing={1}>
+                        <Grid sx={{ mt: 2 }} width="100%">
+                            <Autocomplete
+                                disablePortal
+                                id="age"
+                                value={this.form.age}
+                                getOptionLabel={(option) => String(option)}
+                                options={[...Array(70 - 16 + 1).keys()].map((x) => x + 16)}
+                                onChange={(event, value) => this.handleChange({ target: { name: "age", value: value } })}
+                                renderInput={(params) => <TextField {...params} label="Age" />}
+                                disableClearable={true}
+                            />
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel>
+                                <a href="https://www.gov.uk/state-pension-age" target="_blank" rel="noreferrer">
+                                    Normal Pension Age
+                                </a>
+                            </InputLabel>
+                            <FormControl variant="standard" fullWidth>
+                                <Select
+                                    name="normalPensionAge"
+                                    value={this.form.normalPensionAge}
+                                    labelId="normalPensionAge"
+                                    id="normalPensionAge"
+                                    onChange={this.handleChange}>
+                                    <MenuItem value="65">65</MenuItem>
+                                    <MenuItem value="66">66</MenuItem>
+                                    <MenuItem value="67">67</MenuItem>
+                                    <MenuItem value="68">68</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel>Early Retirement Age</InputLabel>
+                            <FormControl variant="standard" fullWidth>
+                                <Select
+                                    name="earlyRetirementAge"
+                                    value={this.form.earlyRetirementAge}
+                                    labelId="earlyRetirementAge"
+                                    id="earlyRetirementAge"
+                                    onChange={this.handleChange}>
+                                    <MenuItem value="55">55</MenuItem>
+                                    <MenuItem value="56">56</MenuItem>
+                                    <MenuItem value="57">57</MenuItem>
+                                    <MenuItem value="58">58</MenuItem>
+                                    <MenuItem value="59">59</MenuItem>
+                                    <MenuItem value="60">60</MenuItem>
+                                    <MenuItem value="61">61</MenuItem>
+                                    <MenuItem value="62">62</MenuItem>
+                                    <MenuItem value="63">63</MenuItem>
+                                    <MenuItem value="64">64</MenuItem>
+                                    <MenuItem value="65">65</MenuItem>
+                                    <MenuItem value="66">66</MenuItem>
+                                    <MenuItem value="67">67</MenuItem>
+                                    <MenuItem value="68">68</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel htmlFor="currentPensionPot">Current Pension Pot</InputLabel>
+                            <FormControl fullWidth>
+                                <Input
+                                    name="currentPensionPot"
+                                    value={this.form.currentPensionPot}
+                                    id="currentPensionPot"
+                                    startAdornment={<InputAdornment position="start">£</InputAdornment>}
+                                    type="number"
+                                    onChange={this.handleChange}
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel htmlFor="pensionableEarnings">Pensionable Earnings</InputLabel>
+                            <FormControl fullWidth>
+                                <Input
+                                    name="pensionableEarnings"
+                                    value={this.form.pensionableEarnings}
+                                    id="pensionableEarnings"
+                                    startAdornment={<InputAdornment position="start">£</InputAdornment>}
+                                    type="number"
+                                    onChange={this.handleChange}
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel>Monthly Added Pension Payments(£)</InputLabel>
+                            <FormControl fullWidth>
+                                <Input
+                                    name="monthlyAddedPensionPayment"
+                                    value={this.form.monthlyAddedPensionPayment}
+                                    id="monthlyAddedPensionPayment"
+                                    type="number"
+                                    onChange={this.handleChange}
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel id="addedPensionType">Added Pension Type</InputLabel>
+                            <FormControl variant="standard" fullWidth>
+                                <Select
+                                    name="addedPensionType"
+                                    value={this.form.addedPensionType}
+                                    labelId="addedPensionType"
+                                    id="addedPensionType"
+                                    onChange={this.handleChange}>
+                                    <MenuItem value="self">Self</MenuItem>
+                                    <MenuItem value="self+dependants">Self & Dependants</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <InputLabel id="EPAPension">EPA</InputLabel>
+                            <FormControl variant="standard" fullWidth>
+                                <Select name="EPAPension" value={this.form.EPAPension} labelId="EPAPension" id="EPAPension" onChange={this.handleChange}>
+                                    <MenuItem value="0">No EPA</MenuItem>
+                                    <MenuItem value="65">65</MenuItem>
+                                    <MenuItem value="66">66</MenuItem>
+                                    <MenuItem value="67">67</MenuItem>
+                                    <MenuItem value="68">68</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid width="100%">
+                            <Autocomplete
+                                disablePortal
+                                id="reducedHoursAge"
+                                value={this.form.reducedHoursAge}
+                                getOptionLabel={(option) => String(option)}
+                                options={[...Array(70 - 16 + 1).keys()].map((x) => x + 16)}
+                                onChange={(event, value) => this.handleChange({ target: { name: "reducedHoursAge", value: value } })}
+                                renderInput={(params) => <TextField {...params} label="Reduced Hours Age" />}
+                                disableClearable={true}
+                            />
+                        </Grid>
+                        <Grid width="100%">
+                            <Autocomplete
+                                disablePortal
+                                id="reducedHoursPercentage"
+                                value={this.form.reducedHoursPercentage}
+                                getOptionLabel={(option) => String(option)}
+                                options={Array.from(Array(101).keys())}
+                                onChange={(event, value) => this.handleChange({ target: { name: "reducedHoursPercentage", value: value } })}
+                                renderInput={(params) => <TextField {...params} label="Reduced Hours Percentage" />}
+                                disableClearable={true}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid width="100%">
-                        <InputLabel id="addedPensionTypeInput">Added Pension Type</InputLabel>
-                        <FormControl variant="standard" fullWidth>
-                            <Select
-                                name="addedPensionType"
-                                value={this.form.addedPensionType}
-                                labelId="addedPensionTypeInput"
-                                id="demo-simple-select"
-                                label="Added Pension Type"
-                                onChange={this.handleChange}>
-                                <MenuItem value="self">Self</MenuItem>
-                                <MenuItem value="self+dependants">Self & Dependants</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid width="100%">
-                        <InputLabel id="EPALabel">EPA</InputLabel>
-                        <FormControl variant="standard" fullWidth>
-                            <Select
-                                name="EPAPension"
-                                value={this.form.EPAPension}
-                                labelId="EPALabel"
-                                id="EPAPension"
-                                label="Added Pension Type"
-                                onChange={this.handleChange}>
-                                <MenuItem value="0">No EPA</MenuItem>
-                                <MenuItem value="65">65</MenuItem>
-                                <MenuItem value="66">66</MenuItem>
-                                <MenuItem value="67">67</MenuItem>
-                                <MenuItem value="68">68</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid width="100%">
-                        <InputLabel>Reduced Hours Age</InputLabel>
-                        <Slider
-                            name="reducedHoursAge"
-                            value={this.form.reducedHoursAge}
-                            min={30}
-                            max={65}
-                            step={1}
-                            valueLabelDisplay="on"
-                            onChange={this.handleChange}
-                        />
-                    </Grid>
-                    <Grid width="100%">
-                        <InputLabel>Reduced Hours Percentage</InputLabel>
-                        <Slider
-                            name="reducedHoursPercentage"
-                            value={this.form.reducedHoursPercentage}
-                            min={0}
-                            max={100}
-                            step={1}
-                            valueLabelDisplay="on"
-                            onChange={this.handleChange}
-                        />
-                    </Grid>
-                </Grid>
-            </form>
-        );
+                </form>
+            );
+        }
     }
 }
 
@@ -169,7 +329,8 @@ PensionForm.propTypes = {
         EPAPension: PropTypes.number.isRequired,
         reducedHoursAge: PropTypes.number.isRequired,
         reducedHoursPercentage: PropTypes.number.isRequired
-    })
+    }),
+    isMobile: PropTypes.bool.isRequired
 };
 
 export default PensionForm;

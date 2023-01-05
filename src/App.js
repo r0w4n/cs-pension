@@ -4,7 +4,7 @@
  */
 
 import { useState, React } from "react";
-import { ThemeProvider, createTheme, CssBaseline, Container, Unstable_Grid2 as Grid } from "@mui/material/";
+import { useTheme, useMediaQuery, ThemeProvider, createTheme, CssBaseline, Container, Unstable_Grid2 as Grid } from "@mui/material/";
 import "typeface-roboto";
 
 import { calculatePensionPots } from "./pension";
@@ -26,6 +26,8 @@ function App() {
         reducedHoursAge: 55,
         reducedHoursPercentage: 50
     };
+
+    const isMobile = useMediaQuery(useTheme().breakpoints.down("sm"));
 
     const [cardData, setCardData] = useState(calculatePensionPots(initialPensionFormState));
     const handleCallback = (form) => {
@@ -62,7 +64,7 @@ function App() {
                     <AppBar />
                     <Grid container spacing={2}>
                         <Grid xs={12} sm={5} md={4} lg={4}>
-                            <PensionForm initialState={initialPensionFormState} onChange={handleCallback} />
+                            <PensionForm initialState={initialPensionFormState} onChange={handleCallback} isMobile={isMobile} />
                         </Grid>
                         <Grid xs={12} sm={7} md={8} lg={8}>
                             <Grid>
