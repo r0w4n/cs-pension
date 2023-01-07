@@ -164,15 +164,17 @@ class PensionForm extends React.Component {
                 <form>
                     <Grid container direction={"column"} spacing={1}>
                         <Grid sx={{ mt: 2 }} width="100%">
+                            <InputLabel htmlFor="age">Age</InputLabel>
                             <Autocomplete
-                                disablePortal
-                                id="age"
-                                value={this.form.age}
+                                autoHighlight
+                                autoSelect
+                                disableClearable
                                 getOptionLabel={(option) => String(option)}
-                                options={[...Array(70 - 16 + 1).keys()].map((x) => x + 16)}
+                                id="age"
                                 onChange={(event, value) => this.handleChange({ target: { name: "age", value: value } })}
-                                renderInput={(params) => <TextField {...params} label="Age" />}
-                                disableClearable={true}
+                                options={[...Array(70 - 16 + 1).keys()].map((x) => x + 16)}
+                                renderInput={(params) => <TextField {...params} variant="standard" />}
+                                value={this.form.age}
                             />
                         </Grid>
                         <Grid width="100%">
@@ -286,27 +288,31 @@ class PensionForm extends React.Component {
                             </FormControl>
                         </Grid>
                         <Grid width="100%">
+                            <InputLabel id="reducedHoursAge">Reduced Hours Age</InputLabel>
                             <Autocomplete
-                                disablePortal
-                                id="reducedHoursAge"
-                                value={this.form.reducedHoursAge}
+                                autoHighlight
+                                autoSelect
+                                disableClearable
                                 getOptionLabel={(option) => String(option)}
-                                options={[...Array(70 - 16 + 1).keys()].map((x) => x + 16)}
+                                id="reducedHoursAge"
                                 onChange={(event, value) => this.handleChange({ target: { name: "reducedHoursAge", value: value } })}
-                                renderInput={(params) => <TextField {...params} label="Reduced Hours Age" />}
-                                disableClearable={true}
+                                options={[...Array(70 - 16 + 1).keys()].map((x) => x + 16)}
+                                renderInput={(params) => <TextField {...params} variant="standard" />}
+                                value={this.form.reducedHoursAge}
                             />
                         </Grid>
                         <Grid width="100%">
+                            <InputLabel id="reducedHoursPercentage">Reduced Hours Percentage</InputLabel>
                             <Autocomplete
-                                disablePortal
-                                id="reducedHoursPercentage"
-                                value={this.form.reducedHoursPercentage}
+                                autoHighlight
+                                autoSelect
+                                disableClearable
                                 getOptionLabel={(option) => String(option)}
-                                options={Array.from(Array(101).keys())}
+                                id="reducedHoursPercentage"
                                 onChange={(event, value) => this.handleChange({ target: { name: "reducedHoursPercentage", value: value } })}
-                                renderInput={(params) => <TextField {...params} label="Reduced Hours Percentage" />}
-                                disableClearable={true}
+                                options={Array.from(Array(101).keys())}
+                                renderInput={(params) => <TextField {...params} variant="standard" />}
+                                value={this.form.reducedHoursPercentage}
                             />
                         </Grid>
                     </Grid>
