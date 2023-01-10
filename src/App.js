@@ -12,6 +12,7 @@ import PensionForm from "./components/PensionForm";
 import NPACards from "./components/NpaCards";
 import EarlyRetirementCards from "./components/EarlyRetirementCards";
 import AppBar from "./components/AppBar";
+import MobilePensionForm from "./components/MobilePensionForm";
 
 function App() {
     const initialPensionFormState = JSON.parse(window.localStorage.getItem("form")) || {
@@ -64,7 +65,11 @@ function App() {
                     <AppBar />
                     <Grid container spacing={2}>
                         <Grid xs={12} sm={5} md={4} lg={4}>
-                            <PensionForm initialState={initialPensionFormState} onChange={handleCallback} isMobile={isMobile} />
+                            {isMobile ? (
+                                <MobilePensionForm initialState={initialPensionFormState} onChange={handleCallback} />
+                            ) : (
+                                <PensionForm initialState={initialPensionFormState} onChange={handleCallback} />
+                            )}
                         </Grid>
                         <Grid xs={12} sm={7} md={8} lg={8}>
                             <Grid>
