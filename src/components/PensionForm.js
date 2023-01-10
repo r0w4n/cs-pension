@@ -168,8 +168,7 @@ PensionForm.propTypes = {
         EPAPension: PropTypes.number.isRequired,
         reducedHoursAge: PropTypes.number.isRequired,
         reducedHoursPercentage: PropTypes.number.isRequired
-    }),
-    isMobile: PropTypes.bool.isRequired
+    })
 };
 
 export default PensionForm;

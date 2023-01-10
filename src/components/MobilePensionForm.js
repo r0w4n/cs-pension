@@ -21,7 +21,7 @@ class MobilePensionForm extends React.Component {
         return (
             <form>
                 <Grid container direction={"column"} spacing={1}>
-                    <Grid sx={{ mt: 2 }} width="100%">
+                    <Grid width="100%">
                         <InputLabel htmlFor="age">Age</InputLabel>
                         <Autocomplete
                             autoHighlight
@@ -56,7 +56,7 @@ class MobilePensionForm extends React.Component {
                         </FormControl>
                     </Grid>
                     <Grid width="100%">
-                        <InputLabel>Early Retirement Age</InputLabel>
+                        <InputLabel htmlFor="earlyRetirementAge">Early Retirement Age</InputLabel>
                         <FormControl variant="standard" fullWidth>
                             <Select
                                 name="earlyRetirementAge"
@@ -108,7 +108,7 @@ class MobilePensionForm extends React.Component {
                         </FormControl>
                     </Grid>
                     <Grid width="100%">
-                        <InputLabel>Monthly Added Pension Payments(£)</InputLabel>
+                        <InputLabel htmlFor="monthlyAddedPensionPayment">Monthly Added Pension Payments(£)</InputLabel>
                         <FormControl fullWidth>
                             <Input
                                 name="monthlyAddedPensionPayment"

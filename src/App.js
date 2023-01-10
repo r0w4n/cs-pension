@@ -4,8 +4,10 @@
  */
 
 import { useState, React } from "react";
-import { useTheme, useMediaQuery, ThemeProvider, createTheme, CssBaseline, Container, Unstable_Grid2 as Grid } from "@mui/material/";
+import { Box, Tab, useTheme, useMediaQuery, ThemeProvider, createTheme, CssBaseline, Container, Unstable_Grid2 as Grid } from "@mui/material/";
 import "typeface-roboto";
+
+import { TabPanel, TabContext, TabList } from "@mui/lab";
 
 import { calculatePensionPots } from "./pension";
 import PensionForm from "./components/PensionForm";
@@ -57,33 +59,68 @@ function App() {
         }
     });
 
-    return (
-        <>
+    const [value, setValue] = useState("2");
+
+    const handleTabChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    if (isMobile) {
+        return (
             <ThemeProvider theme={THEME}>
                 <CssBaseline />
                 <Container maxWidth="lg">
                     <AppBar />
-                    <Grid container spacing={2}>
-                        <Grid xs={12} sm={5} md={4} lg={4}>
-                            {isMobile ? (
+                    <Box sx={{ width: "100%" }}>
+                        <TabContext value={value}>
+                            <TabList onChange={handleTabChange}>
+                                <Tab label="Personal Details" value="1" wrapped />
+                                <Tab label="Normal Retirement" value="2" wrapped />
+                                <Tab label="Early Retirement" value="3" wrapped />
+                            </TabList>
+                            <TabPanel value="1">
                                 <MobilePensionForm initialState={initialPensionFormState} onChange={handleCallback} />
-                            ) : (
-                                <PensionForm initialState={initialPensionFormState} onChange={handleCallback} />
-                            )}
-                        </Grid>
-                        <Grid xs={12} sm={7} md={8} lg={8}>
-                            <Grid>
+                            </TabPanel>
+                            <TabPanel value="2">
                                 <NPACards data={cardData} />
-                            </Grid>
-                            <Grid>
+                            </TabPanel>
+                            <TabPanel value="3">
                                 <EarlyRetirementCards data={cardData} />
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                            </TabPanel>
+                        </TabContext>
+                    </Box>
                 </Container>
             </ThemeProvider>
-        </>
-    );
+        );
+    } else {
+        return (
+            <>
+                <ThemeProvider theme={THEME}>
+                    <CssBaseline />
+                    <Container maxWidth="lg">
+                        <AppBar />
+                        <Grid container spacing={2}>
+                            <Grid xs={12} sm={5} md={4} lg={4}>
+                                {isMobile ? (
+                                    <MobilePensionForm initialState={initialPensionFormState} onChange={handleCallback} />
+                                ) : (
+                                    <PensionForm initialState={initialPensionFormState} onChange={handleCallback} />
+                                )}
+                            </Grid>
+                            <Grid xs={12} sm={7} md={8} lg={8}>
+                                <Grid>
+                                    <NPACards data={cardData} />
+                                </Grid>
+                                <Grid>
+                                    <EarlyRetirementCards data={cardData} />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </ThemeProvider>
+            </>
+        );
+    }
 }
 
 export default App;
