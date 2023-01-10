@@ -4,7 +4,7 @@
  */
 
 import { useState, React } from "react";
-import { Box, Tab, useTheme, useMediaQuery, ThemeProvider, createTheme, CssBaseline, Container, Unstable_Grid2 as Grid } from "@mui/material/";
+import { Tab, useTheme, useMediaQuery, ThemeProvider, createTheme, CssBaseline, Container, Unstable_Grid2 as Grid } from "@mui/material/";
 import "typeface-roboto";
 
 import { TabPanel, TabContext, TabList } from "@mui/lab";
@@ -71,7 +71,7 @@ function App() {
                 <CssBaseline />
                 <Container maxWidth="lg">
                     <AppBar />
-                    <Box sx={{ width: "100%" }}>
+                    <Grid container direction={"column"} spacing={1}>
                         <TabContext value={value}>
                             <TabList onChange={handleTabChange}>
                                 <Tab label="Personal Details" value="1" wrapped />
@@ -88,7 +88,7 @@ function App() {
                                 <EarlyRetirementCards data={cardData} />
                             </TabPanel>
                         </TabContext>
-                    </Box>
+                    </Grid>
                 </Container>
             </ThemeProvider>
         );
