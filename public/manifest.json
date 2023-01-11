@@ -1,10 +1,11 @@
 {
   "short_name": "CS Pension Calc",
   "name": "Civil Service Pension Calculator",
+  "description": "Provides the ability to see your civil service pension based on modifying various parameters",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "48x48",
       "type": "image/x-icon"
     },
     {
@@ -19,6 +20,7 @@
     }
   ],
   "start_url": ".",
+  "id": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
