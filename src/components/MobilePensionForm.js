@@ -1,5 +1,6 @@
 import React from "react";
 import { TextField, Autocomplete, FormControl, Select, MenuItem, InputLabel, Input, InputAdornment, Unstable_Grid2 as Grid } from "@mui/material";
+import InfoTwoToneIcon from "@mui/icons-material/InfoTwoTone";
 import PropTypes from "prop-types";
 import isNumeric from "isnumeric";
 
@@ -37,8 +38,9 @@ class MobilePensionForm extends React.Component {
                     </Grid>
                     <Grid width="100%">
                         <InputLabel>
+                            Normal Pension Age
                             <a href="https://www.gov.uk/state-pension-age" target="_blank" rel="noreferrer">
-                                Normal Pension Age
+                                <InfoTwoToneIcon />
                             </a>
                         </InputLabel>
                         <FormControl variant="standard" fullWidth>
@@ -108,7 +110,15 @@ class MobilePensionForm extends React.Component {
                         </FormControl>
                     </Grid>
                     <Grid width="100%">
-                        <InputLabel htmlFor="monthlyAddedPensionPayment">Monthly Added Pension Payments(£)</InputLabel>
+                        <InputLabel htmlFor="monthlyAddedPensionPayment">
+                            Monthly Added Pension Payments(£){" "}
+                            <a
+                                href="https://www.civilservicepensionscheme.org.uk/your-pension/managing-your-pension/increase-your-pension/added-pension/"
+                                target="_blank"
+                                rel="noreferrer">
+                                <InfoTwoToneIcon />
+                            </a>
+                        </InputLabel>
                         <FormControl fullWidth>
                             <Input
                                 name="monthlyAddedPensionPayment"
@@ -134,7 +144,16 @@ class MobilePensionForm extends React.Component {
                         </FormControl>
                     </Grid>
                     <Grid width="100%">
-                        <InputLabel id="EPAPension">EPA</InputLabel>
+                        <InputLabel id="EPAPension">
+                            EPA
+                            <a
+                                // eslint-disable-next-line max-len
+                                href="https://www.civilservicepensionscheme.org.uk/planning-for-retirement/what-are-my-options/early-retirement/epa-effective-pension-age/"
+                                target="_blank"
+                                rel="noreferrer">
+                                <InfoTwoToneIcon />
+                            </a>
+                        </InputLabel>
                         <FormControl variant="standard" fullWidth>
                             <Select name="EPAPension" value={this.form.EPAPension} labelId="EPAPension" id="EPAPension" onChange={this.handleChange}>
                                 <MenuItem value="0">No EPA</MenuItem>

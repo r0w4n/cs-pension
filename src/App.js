@@ -6,6 +6,7 @@
 import { useState, React } from "react";
 import { Tab, useTheme, useMediaQuery, ThemeProvider, createTheme, CssBaseline, Container, Unstable_Grid2 as Grid } from "@mui/material/";
 import "typeface-roboto";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 import { TabPanel, TabContext, TabList } from "@mui/lab";
 
@@ -17,6 +18,8 @@ import AppBar from "./components/AppBar";
 import MobilePensionForm from "./components/MobilePensionForm";
 
 function App() {
+    const hasSettings = window.localStorage.getItem("form") !== null;
+
     const initialPensionFormState = JSON.parse(window.localStorage.getItem("form")) || {
         age: 45,
         currentPensionPot: 0,
@@ -59,7 +62,7 @@ function App() {
         }
     });
 
-    const [value, setValue] = useState("2");
+    const [value, setValue] = hasSettings ? useState("normal") : useState("settings");
 
     const handleTabChange = (event, newValue) => {
         setValue(newValue);
@@ -73,19 +76,19 @@ function App() {
                     <AppBar />
                     <Grid container direction={"column"} spacing={1}>
                         <TabContext value={value}>
-                            <TabList onChange={handleTabChange}>
-                                <Tab label="Personal Details" value="1" wrapped />
-                                <Tab label="Normal Retirement" value="2" wrapped />
-                                <Tab label="Early Retirement" value="3" wrapped />
+                            <TabList onChange={handleTabChange} variant="fullWidth" textColor="secondary" centered>
+                                <Tab label="Normal Retirement" value="normal" wrapped />
+                                <Tab label="Early Retirement" value="early" wrapped />
+                                <Tab icon={<SettingsIcon />} value="settings" wrapped />
                             </TabList>
-                            <TabPanel value="1">
-                                <MobilePensionForm initialState={initialPensionFormState} onChange={handleCallback} />
-                            </TabPanel>
-                            <TabPanel value="2">
+                            <TabPanel value="normal">
                                 <NPACards data={cardData} />
                             </TabPanel>
-                            <TabPanel value="3">
+                            <TabPanel value="early">
                                 <EarlyRetirementCards data={cardData} />
+                            </TabPanel>
+                            <TabPanel value="settings">
+                                <MobilePensionForm initialState={initialPensionFormState} onChange={handleCallback} />
                             </TabPanel>
                         </TabContext>
                     </Grid>
