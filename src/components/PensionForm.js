@@ -45,7 +45,15 @@ class PensionForm extends React.Component {
                         />
                     </Grid>
                     <Grid width="100%">
-                        <InputLabel htmlFor="currentPensionPot">Current Pension Pot</InputLabel>
+                        <InputLabel htmlFor="currentPensionPot">
+                            Current Pension Pot
+                            <a
+                                href="https://www.civilservicepensionscheme.org.uk/your-pension/yearly-pension-update/annual-benefit-statement-abs/"
+                                target="_blank"
+                                rel="noreferrer">
+                                <InfoTwoToneIcon />
+                            </a>
+                        </InputLabel>
                         <FormControl fullWidth>
                             <Input
                                 name="currentPensionPot"
@@ -84,7 +92,7 @@ class PensionForm extends React.Component {
                     </Grid>
                     <Grid width="100%">
                         <InputLabel htmlFor="monthlyAddedPensionPayment">
-                            Monthly Added Pension Payments(£){" "}
+                            Monthly Added Pension Payments(£)
                             <a
                                 href="https://www.civilservicepensionscheme.org.uk/your-pension/managing-your-pension/increase-your-pension/added-pension/"
                                 target="_blank"

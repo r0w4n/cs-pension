@@ -37,7 +37,7 @@ class MobilePensionForm extends React.Component {
                         />
                     </Grid>
                     <Grid width="100%">
-                        <InputLabel>
+                        <InputLabel htmlFor="normalPensionAge">
                             Normal Pension Age
                             <a href="https://www.gov.uk/state-pension-age" target="_blank" rel="noreferrer">
                                 <InfoTwoToneIcon />
@@ -84,7 +84,15 @@ class MobilePensionForm extends React.Component {
                         </FormControl>
                     </Grid>
                     <Grid width="100%">
-                        <InputLabel htmlFor="currentPensionPot">Current Pension Pot</InputLabel>
+                        <InputLabel htmlFor="currentPensionPot">
+                            Current Pension Pot
+                            <a
+                                href="https://www.civilservicepensionscheme.org.uk/your-pension/yearly-pension-update/annual-benefit-statement-abs/"
+                                target="_blank"
+                                rel="noreferrer">
+                                <InfoTwoToneIcon />
+                            </a>
+                        </InputLabel>
                         <FormControl fullWidth>
                             <Input
                                 name="currentPensionPot"
@@ -111,7 +119,7 @@ class MobilePensionForm extends React.Component {
                     </Grid>
                     <Grid width="100%">
                         <InputLabel htmlFor="monthlyAddedPensionPayment">
-                            Monthly Added Pension Payments(£){" "}
+                            Monthly Added Pension Payments
                             <a
                                 href="https://www.civilservicepensionscheme.org.uk/your-pension/managing-your-pension/increase-your-pension/added-pension/"
                                 target="_blank"
@@ -126,6 +134,7 @@ class MobilePensionForm extends React.Component {
                                 id="monthlyAddedPensionPayment"
                                 type="number"
                                 onChange={this.handleChange}
+                                startAdornment={<InputAdornment position="start">£</InputAdornment>}
                             />
                         </FormControl>
                     </Grid>
