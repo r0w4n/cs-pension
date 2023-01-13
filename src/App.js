@@ -18,8 +18,6 @@ import AppBar from "./components/AppBar";
 import MobilePensionForm from "./components/MobilePensionForm";
 import ReactGA from "react-ga";
 
-
-
 function App() {
     ReactGA.initialize("G-HZWS413BTP");
 
