@@ -16,8 +16,11 @@ import NPACards from "./components/NpaCards";
 import EarlyRetirementCards from "./components/EarlyRetirementCards";
 import AppBar from "./components/AppBar";
 import MobilePensionForm from "./components/MobilePensionForm";
+import ReactGA from "react-ga";
 
 function App() {
+    ReactGA.initialize("G-HZWS413BTP");
+
     const hasSettings = window.localStorage.getItem("form") !== null;
 
     const initialPensionFormState = JSON.parse(window.localStorage.getItem("form")) || {
