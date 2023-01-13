@@ -20,6 +20,7 @@ import ReactGA from "react-ga";
 
 function App() {
     ReactGA.initialize("G-HZWS413BTP");
+    ReactGA.pageview(window.location.pathname + window.location.search);
 
     const hasSettings = window.localStorage.getItem("form") !== null;
 
