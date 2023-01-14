@@ -4,17 +4,16 @@
  */
 
 import { useState, React } from "react";
-import { Tab, useTheme, useMediaQuery, Unstable_Grid2 as Grid } from "@mui/material/";
+import { useTheme, useMediaQuery, Unstable_Grid2 as Grid } from "@mui/material/";
 import "typeface-roboto";
-import SettingsIcon from "@mui/icons-material/Settings";
-
-import { TabPanel, TabContext, TabList } from "@mui/lab";
 
 import { calculatePensionPots } from "./pension";
 import PensionForm from "./components/PensionForm";
 import NPACards from "./components/NpaCards";
 import EarlyRetirementCards from "./components/EarlyRetirementCards";
 import MobilePensionForm from "./components/MobilePensionForm";
+import { Tabs, TabContent } from "./components/Tabs";
+
 import ReactGA from "react-ga4";
 import Page from "./components/Page";
 
@@ -43,32 +42,21 @@ function App() {
         localStorage.setItem("form", JSON.stringify(form));
     };
 
-    const [value, setValue] = window.localStorage.getItem("form") !== null ? useState("normal") : useState("settings");
-
-    const handleTabChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
     if (isMobile) {
         return (
             <Page>
                 <Grid container direction={"column"} spacing={1}>
-                    <TabContext value={value}>
-                        <TabList onChange={handleTabChange} variant="fullWidth" textColor="secondary" centered>
-                            <Tab label="Normal Retirement" value="normal" wrapped />
-                            <Tab label="Early Retirement" value="early" wrapped />
-                            <Tab icon={<SettingsIcon />} value="settings" wrapped />
-                        </TabList>
-                        <TabPanel value="normal">
+                    <Tabs>
+                        <TabContent name="normal">
                             <NPACards data={cardData} />
-                        </TabPanel>
-                        <TabPanel value="early">
+                        </TabContent>
+                        <TabContent name="early">
                             <EarlyRetirementCards data={cardData} />
-                        </TabPanel>
-                        <TabPanel value="settings">
+                        </TabContent>
+                        <TabContent name="settings">
                             <MobilePensionForm initialState={initialPensionFormState} onChange={handleCallback} />
-                        </TabPanel>
-                    </TabContext>
+                        </TabContent>
+                    </Tabs>
                 </Grid>
             </Page>
         );
