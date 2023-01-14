@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import { ThemeProvider, createTheme, CssBaseline, Container } from "@mui/material/";
+import PropTypes from "prop-types";
 
 import AppBar from "./AppBar";
 
@@ -35,5 +35,9 @@ function Page(props) {
         </ThemeProvider>
     );
 }
+
+Page.propTypes = {
+    children: PropTypes.object
+};
 
 export default Page;

@@ -13,36 +13,25 @@ import NPACards from "./components/NpaCards";
 import EarlyRetirementCards from "./components/EarlyRetirementCards";
 import MobilePensionForm from "./components/MobilePensionForm";
 import { Tabs, TabContent } from "./components/Tabs";
+import Page from "./components/Page";
+import defaultSettings from "./defaultSettings.json";
 
 import ReactGA from "react-ga4";
-import Page from "./components/Page";
 
 function App() {
     ReactGA.initialize("G-HZWS413BTP");
     ReactGA.send("pageview");
 
-    const initialPensionFormState = JSON.parse(window.localStorage.getItem("form")) || {
-        age: 45,
-        currentPensionPot: 0,
-        earlyRetirementAge: 55,
-        monthlyAddedPensionPayment: 0,
-        normalPensionAge: 67,
-        addedPensionType: "self",
-        pensionableEarnings: 40000,
-        EPAPension: 0,
-        reducedHoursAge: 55,
-        reducedHoursPercentage: 50
-    };
+    const settings = JSON.parse(window.localStorage.getItem("form")) || defaultSettings;
 
-    const isMobile = useMediaQuery(useTheme().breakpoints.down("sm"));
-
-    const [cardData, setCardData] = useState(calculatePensionPots(initialPensionFormState));
-    const handleCallback = (form) => {
+    const [cardData, setCardData] = useState(calculatePensionPots(settings));
+    const handleUpdatePensionCards = (form) => {
         setCardData(calculatePensionPots(form));
         localStorage.setItem("form", JSON.stringify(form));
     };
 
-    if (isMobile) {
+    if (useMediaQuery(useTheme().breakpoints.down("sm"))) {
+        // is mobile?
         return (
             <Page>
                 <Grid container direction={"column"} spacing={1}>
@@ -54,7 +43,7 @@ function App() {
                             <EarlyRetirementCards data={cardData} />
                         </TabContent>
                         <TabContent name="settings">
-                            <MobilePensionForm initialState={initialPensionFormState} onChange={handleCallback} />
+                            <MobilePensionForm initialState={settings} onChange={handleUpdatePensionCards} />
                         </TabContent>
                     </Tabs>
                 </Grid>
@@ -65,7 +54,7 @@ function App() {
             <Page>
                 <Grid container spacing={2}>
                     <Grid xs={12} sm={5} md={4} lg={4}>
-                        <PensionForm initialState={initialPensionFormState} onChange={handleCallback} />
+                        <PensionForm initialState={settings} onChange={handleUpdatePensionCards} />
                     </Grid>
                     <Grid xs={12} sm={7} md={8} lg={8}>
                         <Grid>

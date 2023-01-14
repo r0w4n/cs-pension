@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useState } from "react";
 import { Tab } from "@mui/material/";
 import SettingsIcon from "@mui/icons-material/Settings";
+import PropTypes from "prop-types";
 
 function Tabs(props) {
     const [value, setValue] = window.localStorage.getItem("form") !== null ? useState("normal") : useState("settings");
@@ -26,5 +26,14 @@ function Tabs(props) {
 function TabContent(props) {
     return <TabPanel value={props.name}>{props.children}</TabPanel>;
 }
+
+Tabs.propTypes = {
+    children: PropTypes.array
+};
+
+TabContent.propTypes = {
+    name: PropTypes.string,
+    children: PropTypes.object
+};
 
 export { Tabs, TabContent };
