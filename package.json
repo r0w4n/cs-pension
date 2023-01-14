@@ -1,7 +1,7 @@
 {
   "name": "cs-pension",
   "version": "0.1.0",
-  "homepage": "https://r0w4n.github.io/cs-pension/",
+  "homepage": "https://civilservicepensioncalculator.co.uk/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
