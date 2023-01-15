@@ -1,5 +1,6 @@
 import { ThemeProvider, createTheme, CssBaseline, Container } from "@mui/material/";
 import PropTypes from "prop-types";
+import CookieConsent from "react-cookie-consent";
 
 import AppBar from "./AppBar";
 
@@ -32,6 +33,7 @@ function Page(props) {
                 <AppBar />
                 {props.children}
             </Container>
+            <CookieConsent>This website uses cookies for Google Adsense</CookieConsent>
         </ThemeProvider>
     );
 }

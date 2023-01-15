@@ -5,7 +5,6 @@
 
 import { useState, React } from "react";
 import { useTheme, useMediaQuery, Unstable_Grid2 as Grid } from "@mui/material/";
-import "typeface-roboto";
 
 import { calculatePensionPots } from "./pension";
 import PensionForm from "./components/PensionForm";
