@@ -33,7 +33,7 @@ function Page(props) {
                 <AppBar />
                 {props.children}
             </Container>
-            <CookieConsent>This website uses cookies for Google Adsense</CookieConsent>
+            <CookieConsent>This website uses cookies for Google Analytics</CookieConsent>
         </ThemeProvider>
     );
 }
