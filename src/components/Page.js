@@ -2,7 +2,6 @@ import { BottomNavigation, BottomNavigationAction, ThemeProvider, createTheme, C
 import PropTypes from "prop-types";
 import CookieConsent from "react-cookie-consent";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import InfoIcon from "@mui/icons-material/Info";
