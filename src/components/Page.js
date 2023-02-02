@@ -44,7 +44,7 @@ function Page(props) {
                         href="https://www.paypal.com/donate/?hosted_button_id=37J8F7GCENZVA    "
                     />
                     <BottomNavigationAction
-                        label="Report Bug"
+                        label="Report"
                         icon={<BugReportIcon />}
                         href="https://github.com/r0w4n/cs-pension/issues/new?assignees=&labels=&template=bug_report.md&title="
                     />
