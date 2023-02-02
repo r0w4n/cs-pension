@@ -1,5 +1,5 @@
 # Civil Service Alpha Pension Calculator
-This is a pension calculator that is hosted at https://civilservicepensioncalculator.co.uk and has been designed solely for the UK Government Civil Service Alpha Pension.
+This is a pension calculator that is hosted at https://civilservicepensioncalculator.co.uk and has been designed solely for the UK Government Civil Service Alpha Pension. It is not an offical calculator and is not affliated with the civil service pension scheme in any way.
 
 # Assumptions
 ## State Pension
