@@ -3,7 +3,7 @@ This is a pension calculator that is hosted at https://civilservicepensioncalcul
 
 # Assumptions
 ## State Pension
-The state pension provided assumes that you are intitled to the full state pension and which is currently £9660 per annum. 
+The state pension provided assumes that you are entitled to the full state pension and which is currently £9660 per annum. 
 
 # Limitation
 ## Whole years
