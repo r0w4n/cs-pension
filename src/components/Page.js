@@ -5,6 +5,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
+import InfoIcon from "@mui/icons-material/Info";
 
 import AppBar from "./AppBar";
 
@@ -53,6 +54,7 @@ function Page(props) {
                         icon={<LightbulbIcon />}
                         href="https://github.com/r0w4n/cs-pension/issues/new?assignees=&labels=&template=feature_request.md&title="
                     />
+                    <BottomNavigationAction label="Info" icon={<InfoIcon />} href="https://github.com/r0w4n/cs-pension/blob/main/README.md" />
                 </BottomNavigation>
             </Container>
             <CookieConsent>This website uses cookies for Google Analytics</CookieConsent>
