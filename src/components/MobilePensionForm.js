@@ -85,7 +85,7 @@ class MobilePensionForm extends React.Component {
                     </Grid>
                     <Grid width="100%">
                         <InputLabel htmlFor="currentPensionPot">
-                            Current Pension Pot
+                            Accrued Pension To Date
                             <a
                                 href="https://www.civilservicepensionscheme.org.uk/your-pension/yearly-pension-update/annual-benefit-statement-abs/"
                                 target="_blank"
