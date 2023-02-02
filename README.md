@@ -1,6 +1,10 @@
 # Civil Service Alpha Pension Calculator
 This is a pension calculator that is hosted at https://civilservicepensioncalculator.co.uk and has been designed solely for the UK Government Civil Service Alpha Pension.
 
+# Assumptions
+## State Pension
+The state pension provided assumes that you are intitled to the full state pension and that it is £9660 per annual
+
 # Limitation
 ## Whole years
 All caculations are based on whole years and do not take into account any partial years.
