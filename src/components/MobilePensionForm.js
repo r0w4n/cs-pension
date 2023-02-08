@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, Autocomplete, FormControl, Select, MenuItem, InputLabel, Input, InputAdornment, Unstable_Grid2 as Grid } from "@mui/material";
+import { Button, TextField, Autocomplete, FormControl, Select, MenuItem, InputLabel, Input, InputAdornment, Unstable_Grid2 as Grid } from "@mui/material";
 import InfoTwoToneIcon from "@mui/icons-material/InfoTwoTone";
 import PropTypes from "prop-types";
 import isNumeric from "isnumeric";
@@ -9,6 +9,7 @@ class MobilePensionForm extends React.Component {
         super(props);
         this.onChange = props.onChange;
         this.form = props.initialState;
+        this.changeTab = props.onChangeTab;
     }
 
     handleChange = (event) => {
@@ -201,6 +202,18 @@ class MobilePensionForm extends React.Component {
                             value={this.form.reducedHoursPercentage}
                         />
                     </Grid>
+                    <Grid container width="100%">
+                        <Grid xs={6}>
+                            <Button variant="contained" onClick={this.changeTab} value="normal">
+                                Calculate for Normal Retirement
+                            </Button>
+                        </Grid>
+                        <Grid xs={6}>
+                            <Button variant="contained" onClick={this.changeTab} value="early">
+                                Calculate for Early Retirement
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </form>
         );
@@ -220,7 +233,8 @@ MobilePensionForm.propTypes = {
         EPAPension: PropTypes.number.isRequired,
         reducedHoursAge: PropTypes.number.isRequired,
         reducedHoursPercentage: PropTypes.number.isRequired
-    })
+    }),
+    onChangeTab: PropTypes.func
 };
 
 export default MobilePensionForm;
