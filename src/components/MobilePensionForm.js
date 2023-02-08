@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, Autocomplete, FormControl, Select, MenuItem, InputLabel, Input, InputAdornment, Unstable_Grid2 as Grid } from "@mui/material";
+import { Button, TextField, Autocomplete, FormControl, Select, MenuItem, InputLabel, Input, InputAdornment, Unstable_Grid2 as Grid } from "@mui/material";
 import InfoTwoToneIcon from "@mui/icons-material/InfoTwoTone";
 import PropTypes from "prop-types";
 import isNumeric from "isnumeric";
@@ -200,6 +200,14 @@ class MobilePensionForm extends React.Component {
                             renderInput={(params) => <TextField {...params} variant="standard" />}
                             value={this.form.reducedHoursPercentage}
                         />
+                    </Grid>
+                    <Grid>
+                        <Grid>
+                            <Button variant="contained">Calculate Normal Pension</Button>
+                        </Grid>
+                        <Grid>
+                            <Button variant="contained">Calculate Normal Pension</Button>
+                        </Grid>
                     </Grid>
                 </Grid>
             </form>
