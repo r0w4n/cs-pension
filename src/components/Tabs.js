@@ -1,18 +1,14 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { useState } from "react";
 import { Tab } from "@mui/material/";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PropTypes from "prop-types";
 
 function Tabs(props) {
-    const [value, setValue] = window.localStorage.getItem("form") !== null ? useState("normal") : useState("settings");
-
-    const handleTabChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    const handleTabChange = props.onTabChange;
+    const tabSelection = props.tabSelection;
 
     return (
-        <TabContext value={value}>
+        <TabContext value={tabSelection}>
             <TabList onChange={handleTabChange} variant="fullWidth" textColor="secondary" centered>
                 <Tab label="Normal Retirement" value="normal" wrapped />
                 <Tab label="Early Retirement" value="early" wrapped />
@@ -28,7 +24,9 @@ function TabContent(props) {
 }
 
 Tabs.propTypes = {
-    children: PropTypes.array
+    children: PropTypes.array,
+    tabSelection: PropTypes.string,
+    onTabChange: PropTypes.func
 };
 
 TabContent.propTypes = {

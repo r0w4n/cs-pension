@@ -22,11 +22,20 @@ function App() {
     ReactGA.send("pageview");
 
     const settings = JSON.parse(window.localStorage.getItem("form")) || defaultSettings;
-
     const [cardData, setCardData] = useState(calculatePensionPots(settings));
+    const [selectedTab, setTab] = useState(window.localStorage.getItem("form") ? "normal" : "settings");
+
     const handleUpdatePensionCards = (form) => {
         setCardData(calculatePensionPots(form));
         localStorage.setItem("form", JSON.stringify(form));
+    };
+
+    const triggerTabChange = (event) => {
+        setTab(event.target?.value);
+    };
+
+    const handleTabChange = (event, newTab) => {
+        setTab(newTab);
     };
 
     if (useMediaQuery(useTheme().breakpoints.down("sm"))) {
@@ -34,7 +43,7 @@ function App() {
         return (
             <Page>
                 <Grid container direction={"column"} spacing={1}>
-                    <Tabs>
+                    <Tabs tabSelection={selectedTab} onTabChange={handleTabChange}>
                         <TabContent name="normal">
                             <NPACards data={cardData} />
                         </TabContent>
@@ -42,7 +51,7 @@ function App() {
                             <EarlyRetirementCards data={cardData} />
                         </TabContent>
                         <TabContent name="settings">
-                            <MobilePensionForm initialState={settings} onChange={handleUpdatePensionCards} />
+                            <MobilePensionForm initialState={settings} onChange={handleUpdatePensionCards} onChangeTab={triggerTabChange} />
                         </TabContent>
                     </Tabs>
                 </Grid>

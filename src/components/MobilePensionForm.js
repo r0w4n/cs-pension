@@ -9,6 +9,7 @@ class MobilePensionForm extends React.Component {
         super(props);
         this.onChange = props.onChange;
         this.form = props.initialState;
+        this.changeTab = props.onChangeTab;
     }
 
     handleChange = (event) => {
@@ -201,12 +202,16 @@ class MobilePensionForm extends React.Component {
                             value={this.form.reducedHoursPercentage}
                         />
                     </Grid>
-                    <Grid>
-                        <Grid>
-                            <Button variant="contained">Calculate Normal Pension</Button>
+                    <Grid container width="100%">
+                        <Grid xs={6}>
+                            <Button variant="contained" onClick={this.changeTab} value="normal">
+                                Calculate for Normal Retirement
+                            </Button>
                         </Grid>
-                        <Grid>
-                            <Button variant="contained">Calculate Normal Pension</Button>
+                        <Grid xs={6}>
+                            <Button variant="contained" onClick={this.changeTab} value="early">
+                                Calculate for Early Retirement
+                            </Button>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -228,7 +233,8 @@ MobilePensionForm.propTypes = {
         EPAPension: PropTypes.number.isRequired,
         reducedHoursAge: PropTypes.number.isRequired,
         reducedHoursPercentage: PropTypes.number.isRequired
-    })
+    }),
+    onChangeTab: PropTypes.func
 };
 
 export default MobilePensionForm;
