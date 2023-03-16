@@ -17,7 +17,7 @@ e.g., if you retire at 67 and 5 months it will not take into consideration the 7
 The calculator does not take into account inflation.
 
 ## Only Human
-Although best effort have been made to make this calculator accurate, there may be errors in the code or in the assumuptions made when writing the code. You should only use this calculator as a guide and seek professional finacial advice when making desisions.
+Although best effort have been made to make this calculator accurate, there may be errors in the code or in the assumuptions made when writing the code. You should only use this calculator as a guide and seek professional finacial advice when making decisions.
 
 If you find a bug in the calculations or would like to challenge any of the methods please submit an [issue](https://github.com/r0w4n/cs-pension/issues) 
 
