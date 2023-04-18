@@ -11,7 +11,7 @@ All caculations are based on whole years and do not take into account any partia
 
 e.g., if you are using the calculator on the 31st of December and are looking at added pension then it will use the whole of the current year in its calculations.
 
-e.g., if you retire at 67 and 5 months it will not take into consideration the 7 months.
+e.g., if you retire at 67 and 5 months it will not take into consideration the 5 months.
 
 ## Inflation
 The calculator does not take into account inflation.
