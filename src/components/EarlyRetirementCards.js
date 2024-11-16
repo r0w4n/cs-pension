@@ -6,6 +6,7 @@ import PensionCard from "./PensionCard";
 
 const EarlyRetirementCards = (props) => {
     const cardData = props.data;
+    const statePension = cardData.statePension;
 
     return (
         <Card sx={{ p: -1 }}>
@@ -22,6 +23,7 @@ const EarlyRetirementCards = (props) => {
                             title="Your annual early retirement pension is"
                             subtitle="including state pension (at NPA)"
                             pension={cardData.pensionForEarlyRetirement}
+                            statePension={statePension}
                         />
                     </Grid>
                     <Grid xs={12} sm={6} lg={3}>
@@ -29,6 +31,7 @@ const EarlyRetirementCards = (props) => {
                             title="Your annual early retirement pension with added pension is"
                             subtitle="including state pension (at NPA)"
                             pension={cardData.pensionForEarlyRetirementWithAddedPension}
+                            statePension={statePension}
                         />
                     </Grid>
                     <Grid xs={12} sm={6} lg={3}>
@@ -36,6 +39,7 @@ const EarlyRetirementCards = (props) => {
                             title="Your annual early retirement pension with reduced hours is"
                             subtitle="including state pension (at NPA)"
                             pension={cardData.pensionForEarlyRetirementWithReducedHours}
+                            statePension={statePension}
                         />
                     </Grid>
                     <Grid xs={12} sm={6} lg={3}>
@@ -43,6 +47,7 @@ const EarlyRetirementCards = (props) => {
                             title="Your annual early retirement pension with reduced hours and added pension is"
                             subtitle="including state pension (at NPA)"
                             pension={cardData.pensionForEarlyRetirementWithAddedPensionReducedHours}
+                            statePension={statePension}
                         />
                     </Grid>
                 </Grid>
@@ -56,7 +61,8 @@ EarlyRetirementCards.propTypes = {
         pensionForEarlyRetirementWithAddedPensionReducedHours: PropTypes.number.isRequired,
         pensionForEarlyRetirementWithReducedHours: PropTypes.number.isRequired,
         pensionForEarlyRetirementWithAddedPension: PropTypes.number.isRequired,
-        pensionForEarlyRetirement: PropTypes.number.isRequired
+        pensionForEarlyRetirement: PropTypes.number.isRequired,
+        statePension: PropTypes.number.isRequired
     })
 };
 
