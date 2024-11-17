@@ -21,7 +21,7 @@ function App() {
     ReactGA.initialize("G-HZWS413BTP");
     ReactGA.send("pageview");
 
-    const settings = JSON.parse(window.localStorage.getItem("form")) || defaultSettings;
+    const settings = { ...defaultSettings, ...JSON.parse(window.localStorage.getItem("form")) };
     const [cardData, setCardData] = useState(calculatePensionPots(settings));
     const [selectedTab, setTab] = useState(window.localStorage.getItem("form") ? "normal" : "settings");
 
