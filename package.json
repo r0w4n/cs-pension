@@ -17,7 +17,8 @@
     "react-ga4": "^1.4.1",
     "react-scripts": "^5.0.1",
     "typeface-roboto": "^1.1.13",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yarn": "^1.22.22"
   },
   "scripts": {
     "start": "react-scripts start",
