@@ -1,12 +1,13 @@
 {
     "age": 45,
     "currentPensionPot": 0,
-    "earlyRetirementAge": 55,
+    "earlyRetirementAge": 57,
     "monthlyAddedPensionPayment": 0,
     "normalPensionAge": 67,
     "addedPensionType": "self",
     "pensionableEarnings": 40000,
     "EPAPension": 0,
     "reducedHoursAge": 55,
-    "reducedHoursPercentage": 50
+    "reducedHoursPercentage": 50,
+    "statePension": 11542
 }

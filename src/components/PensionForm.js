@@ -176,6 +176,19 @@ class PensionForm extends React.Component {
                             onChange={this.handleChange}
                         />
                     </Grid>
+                    <Grid width="100%">
+                        <InputLabel>State Pension</InputLabel>
+                        <FormControl fullWidth>
+                            <Input
+                                name="statePension"
+                                value={this.form.statePension}
+                                id="statePension"
+                                startAdornment={<InputAdornment position="start">£</InputAdornment>}
+                                type="number"
+                                onChange={this.handleChange}
+                            />
+                        </FormControl>
+                    </Grid>
                 </Grid>
             </form>
         );
@@ -194,7 +207,8 @@ PensionForm.propTypes = {
         pensionableEarnings: PropTypes.number.isRequired,
         EPAPension: PropTypes.number.isRequired,
         reducedHoursAge: PropTypes.number.isRequired,
-        reducedHoursPercentage: PropTypes.number.isRequired
+        reducedHoursPercentage: PropTypes.number.isRequired,
+        statePension: PropTypes.number.isRequired
     })
 };
 

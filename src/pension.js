@@ -3,7 +3,6 @@ import addedPensionByPeriodicalContributionFactors from "./data/added_pension_by
 import addedPensionRevaluationFactorByYears from "./data/added_pension_revaluation_factors.js";
 
 const pensionAccrualFactor = 0.0232;
-const statePension = 9660;
 
 /**
  * Pension Calculation Class
@@ -25,7 +24,8 @@ class Pension {
             addedPensionType: "self",
             pensionableEarnings: 0,
             EPAPension: 0,
-            reducedHoursPercentage: 0
+            reducedHoursPercentage: 0,
+            statePension: 0
         }
     ) {
         this.parameters = parameters;
@@ -269,8 +269,9 @@ function calculatePensionPots(parameters) {
         pensionForEarlyRetirement: pension.calculatePensionForEarlyRetirement(),
         pensionForEarlyRetirementWithAddedPension: pension.calculatePensionForEarlyRetirementWithAddedPension(),
         pensionForEarlyRetirementWithReducedHours: pension.calculatePensionForEarlyRetirementWithReducedHours(),
-        pensionForEarlyRetirementWithAddedPensionReducedHours: pension.calculatePensionForEarlyRetirementWithAddedPensionReducedHours()
+        pensionForEarlyRetirementWithAddedPensionReducedHours: pension.calculatePensionForEarlyRetirementWithAddedPensionReducedHours(),
+        statePension: pension.parameters.statePension
     };
 }
 
-export { Pension, statePension, calculatePensionPots };
+export { Pension, calculatePensionPots };

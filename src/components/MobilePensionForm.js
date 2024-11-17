@@ -202,6 +202,24 @@ class MobilePensionForm extends React.Component {
                             value={this.form.reducedHoursPercentage}
                         />
                     </Grid>
+                    <Grid width="100%">
+                        <InputLabel htmlFor="statePension">
+                            State Pension
+                            <a href="https://www.gov.uk/browse/working/state-pension" target="_blank" rel="noreferrer">
+                                <InfoTwoToneIcon />
+                            </a>
+                        </InputLabel>
+                        <FormControl fullWidth>
+                            <Input
+                                name="statePension"
+                                value={this.form.statePension}
+                                id="statePension"
+                                type="number"
+                                onChange={this.handleChange}
+                                startAdornment={<InputAdornment position="start">£</InputAdornment>}
+                            />
+                        </FormControl>
+                    </Grid>
                     <Grid container width="100%">
                         <Grid xs={6}>
                             <Button variant="contained" onClick={this.changeTab} value="normal">
@@ -232,7 +250,8 @@ MobilePensionForm.propTypes = {
         pensionableEarnings: PropTypes.number.isRequired,
         EPAPension: PropTypes.number.isRequired,
         reducedHoursAge: PropTypes.number.isRequired,
-        reducedHoursPercentage: PropTypes.number.isRequired
+        reducedHoursPercentage: PropTypes.number.isRequired,
+        statePension: PropTypes.number.isRequired
     }),
     onChangeTab: PropTypes.func
 };
