@@ -79,9 +79,10 @@ class PensionForm extends React.Component {
                         </FormControl>
                     </Grid>
                     <Grid width="100%">
-                        <InputLabel>Early Retirement Age</InputLabel>
+                        <InputLabel htmlFor="early-retirementAge">Early Retirement Age</InputLabel>
                         <Slider
                             name="earlyRetirementAge"
+                            id="early-retirementAge"
                             value={this.form.earlyRetirementAge}
                             min={55}
                             max={70}
