@@ -65,10 +65,10 @@ function App() {
                         <PensionForm initialState={settings} onChange={handleUpdatePensionCards} />
                     </Grid>
                     <Grid xs={12} sm={7} md={8} lg={8}>
-                        <Grid>
+                        <Grid paddingTop={1}>
                             <NPACards data={cardData} />
                         </Grid>
-                        <Grid>
+                        <Grid paddingTop={1}>
                             <EarlyRetirementCards data={cardData} />
                         </Grid>
                     </Grid>
