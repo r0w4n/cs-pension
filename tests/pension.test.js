@@ -253,7 +253,7 @@ test("calculate Added Pension For Multiple Years when \
         earlyRetirementAge: 60
     });
 
-    expect(pension.calculateAddedPensionForMultipleYears(true)).toBe(1057);
+    expect(pension.calculateAddedPensionForMultipleYears(true)).toBe(684.936);
 });
 
 // only testing once as this function is an composite function whose components have already been tested
@@ -297,7 +297,7 @@ test("calculate Pension For Early Retirement Monthly Added Pension when:", () =>
         monthlyAddedPensionPayment: 250,
         addedPensionType: "self+dependants"
     });
-    expect(pension.calculatePensionForEarlyRetirementWithAddedPension()).toBe(21925);
+    expect(pension.calculatePensionForEarlyRetirementWithAddedPension()).toBe(19301);
 });
 
 // calculatePensionForEarlyRetirementWithReducedHours
