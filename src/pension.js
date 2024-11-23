@@ -91,6 +91,8 @@ class Pension {
      * @returns {float}
      */
     calculateAddedPensionForMultipleYears = (earlyRetirement = false) => {
+        const earlyReductionFactor = this.getEarlyReductionFactors();
+
         let addedPensionPot = 0;
         let totalContributionsForYear = 12 * this.parameters.monthlyAddedPensionPayment;
         let retirementAge = earlyRetirement === true ? this.parameters.earlyRetirementAge : this.parameters.normalPensionAge;
@@ -98,7 +100,7 @@ class Pension {
             addedPensionPot += this.calculateAddedPensionForYearForGivenAge(totalContributionsForYear, age);
         }
 
-        return addedPensionPot;
+        return earlyRetirement === true ? addedPensionPot * earlyReductionFactor : addedPensionPot;
     };
 
     /**
