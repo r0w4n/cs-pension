@@ -1,7 +1,8 @@
 {
     "age": 45,
     "currentPensionPot": 0,
-    "earlyRetirementAge": 57,
+    "retirementAge": 57,
+    "drawPensionAge": 57,
     "monthlyAddedPensionPayment": 0,
     "normalPensionAge": 67,
     "addedPensionType": "self",

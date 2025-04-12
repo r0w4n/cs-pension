@@ -15,6 +15,11 @@ class PensionForm extends React.Component {
         const { name, value } = event.target;
 
         this.form[name] = isNumeric(value) ? +value : value;
+
+        if (this.form.retirementAge > this.form.drawPensionAge) {
+            this.form.drawPensionAge = this.form.retirementAge;
+        }
+
         this.onChange(this.form);
     };
 
@@ -40,6 +45,32 @@ class PensionForm extends React.Component {
                             max={68}
                             step={1}
                             marks
+                            valueLabelDisplay="on"
+                            onChange={this.handleChange}
+                        />
+                    </Grid>
+                    <Grid width="100%">
+                        <InputLabel>Retirement Age</InputLabel>
+                        <Slider
+                            name="retirementAge"
+                            id="form-retirementAge"
+                            value={this.form.retirementAge}
+                            min={55}
+                            max={70}
+                            step={1}
+                            valueLabelDisplay="on"
+                            onChange={this.handleChange}
+                        />
+                    </Grid>
+                    <Grid width="100%">
+                        <InputLabel htmlFor="form-drawPensionAge">Age when you will draw your pension</InputLabel>
+                        <Slider
+                            name="drawPensionAge"
+                            id="form-drawPensionAge"
+                            value={this.form.drawPensionAge}
+                            min={55}
+                            max={70}
+                            step={1}
                             valueLabelDisplay="on"
                             onChange={this.handleChange}
                         />
@@ -79,20 +110,7 @@ class PensionForm extends React.Component {
                         </FormControl>
                     </Grid>
                     <Grid width="100%">
-                        <InputLabel htmlFor="early-retirementAge">Early Retirement Age</InputLabel>
-                        <Slider
-                            name="earlyRetirementAge"
-                            id="early-retirementAge"
-                            value={this.form.earlyRetirementAge}
-                            min={55}
-                            max={70}
-                            step={1}
-                            valueLabelDisplay="on"
-                            onChange={this.handleChange}
-                        />
-                    </Grid>
-                    <Grid width="100%">
-                        <InputLabel htmlFor="monthlyAddedPensionPayment">
+                        <InputLabel htmlFor="monthly-added-pension-payment">
                             Monthly Added Pension Payments(£)
                             <a
                                 href="https://www.civilservicepensionscheme.org.uk/your-pension/managing-your-pension/increase-your-pension/added-pension/"
@@ -102,6 +120,7 @@ class PensionForm extends React.Component {
                             </a>
                         </InputLabel>
                         <Slider
+                            id="monthly-added-pension-payment"
                             name="monthlyAddedPensionPayment"
                             value={this.form.monthlyAddedPensionPayment}
                             min={0}
@@ -201,7 +220,8 @@ PensionForm.propTypes = {
     initialState: PropTypes.shape({
         age: PropTypes.number.isRequired,
         currentPensionPot: PropTypes.number.isRequired,
-        earlyRetirementAge: PropTypes.number.isRequired,
+        retirementAge: PropTypes.number.isRequired,
+        drawPensionAge: PropTypes.number.isRequired,
         monthlyAddedPensionPayment: PropTypes.number.isRequired,
         normalPensionAge: PropTypes.number.isRequired,
         addedPensionType: PropTypes.string.isRequired,

@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import PensionCard from "./PensionCard";
 
 const NPACards = (props) => {
-    const cardData = props.data;
-    const statePension = cardData.statePension;
+    const cardData = props.data.cardData;
+    const settings = props.data.settings;
 
     return (
         <Card sx={{ p: -1 }}>
@@ -23,7 +23,7 @@ const NPACards = (props) => {
                             title="Your annual pension is"
                             subtitle="including state pension"
                             pension={cardData.pensionForNPA}
-                            statePension={statePension}
+                            statePension={settings.statePension}
                         />
                     </Grid>
                     <Grid xs={12} sm={6} lg={3}>
@@ -31,7 +31,7 @@ const NPACards = (props) => {
                             title="Your annual pension with added pension is"
                             subtitle="including state pension"
                             pension={cardData.pensionForNPAWithAddedPension}
-                            statePension={statePension}
+                            statePension={settings.statePension}
                         />
                     </Grid>
                     <Grid xs={12} sm={6} lg={3}>
@@ -39,7 +39,7 @@ const NPACards = (props) => {
                             title="Your annual pension with reduced hours is"
                             subtitle="including state pension"
                             pension={cardData.pensionForNPAWithReducedHours}
-                            statePension={statePension}
+                            statePension={settings.statePension}
                         />
                     </Grid>
                     <Grid xs={12} sm={6} lg={3}>
@@ -47,7 +47,7 @@ const NPACards = (props) => {
                             title="Your annual pension with reduced hours and added pension is"
                             subtitle="including state pension"
                             pension={cardData.pensionForNPAWithAddedPensionAndReducedHours}
-                            statePension={statePension}
+                            statePension={settings.statePension}
                         />
                     </Grid>
                 </Grid>
@@ -58,12 +58,16 @@ const NPACards = (props) => {
 
 NPACards.propTypes = {
     data: PropTypes.shape({
-        pensionForNPAWithAddedPensionAndReducedHours: PropTypes.number.isRequired,
-        pensionForNPAWithReducedHours: PropTypes.number.isRequired,
-        pensionForNPAWithAddedPension: PropTypes.number.isRequired,
-        pensionForNPA: PropTypes.number.isRequired,
-        statePension: PropTypes.number.isRequired
-    })
+        settings: PropTypes.shape({
+            statePension: PropTypes.number.isRequired
+        }).isRequired,
+        cardData: PropTypes.shape({
+            pensionForNPAWithAddedPensionAndReducedHours: PropTypes.number.isRequired,
+            pensionForNPAWithReducedHours: PropTypes.number.isRequired,
+            pensionForNPAWithAddedPension: PropTypes.number.isRequired,
+            pensionForNPA: PropTypes.number.isRequired
+        }).isRequired
+    }).isRequired
 };
 
 export default NPACards;

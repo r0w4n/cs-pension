@@ -22,11 +22,18 @@ function App() {
     ReactGA.send("pageview");
 
     const settings = { ...defaultSettings, ...JSON.parse(window.localStorage.getItem("form")) };
-    const [cardData, setCardData] = useState(calculatePensionPots(settings));
+    const [cardData, setCardData] = useState({
+        settings: settings,
+        cardData: calculatePensionPots(settings)
+    });
+
     const [selectedTab, setTab] = useState(window.localStorage.getItem("form") ? "normal" : "settings");
 
     const handleUpdatePensionCards = (form) => {
-        setCardData(calculatePensionPots(form));
+        setCardData({
+            settings: form,
+            cardData: calculatePensionPots(form)
+        });
         localStorage.setItem("form", JSON.stringify(form));
     };
 

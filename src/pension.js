@@ -17,7 +17,7 @@ class Pension {
         parameters = {
             age: 0,
             currentPensionPot: 0,
-            earlyRetirementAge: 0,
+            retirementAge: 0,
             reducedHoursAge: 0,
             normalPensionAge: 0,
             monthlyAddedPensionPayment: 0,
@@ -95,7 +95,7 @@ class Pension {
 
         let addedPensionPot = 0;
         let totalContributionsForYear = 12 * this.parameters.monthlyAddedPensionPayment;
-        let retirementAge = earlyRetirement === true ? this.parameters.earlyRetirementAge : this.parameters.normalPensionAge;
+        let retirementAge = earlyRetirement === true ? this.parameters.retirementAge : this.parameters.normalPensionAge;
         for (let age = this.parameters.age; age < retirementAge; age++) {
             addedPensionPot += this.calculateAddedPensionForYearForGivenAge(totalContributionsForYear, age);
         }
@@ -158,7 +158,7 @@ class Pension {
 
         return Math.round(
             ((this.parameters.reducedHoursAge - this.parameters.age) * this.getYearlyPensionPotGrowth() +
-                (this.parameters.earlyRetirementAge - this.parameters.reducedHoursAge) * this.getYearlyPensionPotGrowth(true) +
+                (this.parameters.retirementAge - this.parameters.reducedHoursAge) * this.getYearlyPensionPotGrowth(true) +
                 this.parameters.currentPensionPot) *
                 earlyReductionFactor
         );
@@ -200,7 +200,7 @@ class Pension {
      */
     getPensionableYears = (earlyRetirement = false) => {
         if (earlyRetirement === true) {
-            return this.parameters.earlyRetirementAge - this.parameters.age;
+            return this.parameters.retirementAge - this.parameters.age;
         }
 
         return this.parameters.normalPensionAge - this.parameters.age;
@@ -226,7 +226,8 @@ class Pension {
      * @returns {float}
      */
     getEarlyReductionFactors = () => {
-        return earlyPaymentReductionFactors[this.getEffectiveNormalRetirementAge()][this.parameters.earlyRetirementAge];
+        if (this.parameters.drawPensionAge > this.getEffectiveNormalRetirementAge()) return 1;
+        return earlyPaymentReductionFactors[this.getEffectiveNormalRetirementAge()][this.parameters.drawPensionAge];
     };
 
     /**
@@ -252,7 +253,8 @@ class Pension {
      * @returns {float}
      */
     getAddedPensionRevaluationFactorByYears = (age) => {
-        return addedPensionRevaluationFactorByYears[this.parameters.normalPensionAge - age].factor;
+        var numberOfAprils = this.parameters.normalPensionAge - age;
+        return addedPensionRevaluationFactorByYears[numberOfAprils > 0 ? numberOfAprils : 0].factor;
     };
 }
 
@@ -271,8 +273,7 @@ function calculatePensionPots(parameters) {
         pensionForEarlyRetirement: pension.calculatePensionForEarlyRetirement(),
         pensionForEarlyRetirementWithAddedPension: pension.calculatePensionForEarlyRetirementWithAddedPension(),
         pensionForEarlyRetirementWithReducedHours: pension.calculatePensionForEarlyRetirementWithReducedHours(),
-        pensionForEarlyRetirementWithAddedPensionReducedHours: pension.calculatePensionForEarlyRetirementWithAddedPensionReducedHours(),
-        statePension: pension.parameters.statePension
+        pensionForEarlyRetirementWithAddedPensionReducedHours: pension.calculatePensionForEarlyRetirementWithAddedPensionReducedHours()
     };
 }
 

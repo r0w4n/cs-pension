@@ -16,6 +16,11 @@ class MobilePensionForm extends React.Component {
         const { name, value } = event.target;
 
         this.form[name] = isNumeric(value) ? +value : value;
+
+        if (this.form.retirementAge > this.form.drawPensionAge) {
+            this.form.drawPensionAge = this.form.retirementAge;
+        }
+
         this.onChange(this.form);
     };
 
@@ -59,13 +64,39 @@ class MobilePensionForm extends React.Component {
                         </FormControl>
                     </Grid>
                     <Grid width="100%">
-                        <InputLabel htmlFor="earlyRetirementAge">Early Retirement Age</InputLabel>
+                        <InputLabel htmlFor="retirementAge">Early Retirement Age</InputLabel>
                         <FormControl variant="standard" fullWidth>
                             <Select
-                                name="earlyRetirementAge"
-                                value={this.form.earlyRetirementAge}
-                                labelId="earlyRetirementAge"
-                                id="earlyRetirementAge"
+                                name="retirementAge"
+                                value={this.form.retirementAge}
+                                labelId="retirementAge"
+                                id="retirementAge"
+                                onChange={this.handleChange}>
+                                <MenuItem value="55">55</MenuItem>
+                                <MenuItem value="56">56</MenuItem>
+                                <MenuItem value="57">57</MenuItem>
+                                <MenuItem value="58">58</MenuItem>
+                                <MenuItem value="59">59</MenuItem>
+                                <MenuItem value="60">60</MenuItem>
+                                <MenuItem value="61">61</MenuItem>
+                                <MenuItem value="62">62</MenuItem>
+                                <MenuItem value="63">63</MenuItem>
+                                <MenuItem value="64">64</MenuItem>
+                                <MenuItem value="65">65</MenuItem>
+                                <MenuItem value="66">66</MenuItem>
+                                <MenuItem value="67">67</MenuItem>
+                                <MenuItem value="68">68</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                    <Grid width="100%">
+                        <InputLabel htmlFor="drawPensionAge">Age when you will draw your pension</InputLabel>
+                        <FormControl variant="standard" fullWidth>
+                            <Select
+                                name="drawPensionAge"
+                                value={this.form.drawPensionAge}
+                                labelId="drawPensionAge"
+                                id="drawPensionAge"
                                 onChange={this.handleChange}>
                                 <MenuItem value="55">55</MenuItem>
                                 <MenuItem value="56">56</MenuItem>
@@ -243,7 +274,8 @@ MobilePensionForm.propTypes = {
     initialState: PropTypes.shape({
         age: PropTypes.number.isRequired,
         currentPensionPot: PropTypes.number.isRequired,
-        earlyRetirementAge: PropTypes.number.isRequired,
+        retirementAge: PropTypes.number.isRequired,
+        drawPensionAge: PropTypes.number.isRequired,
         monthlyAddedPensionPayment: PropTypes.number.isRequired,
         normalPensionAge: PropTypes.number.isRequired,
         addedPensionType: PropTypes.string.isRequired,
