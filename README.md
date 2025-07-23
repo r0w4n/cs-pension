@@ -19,12 +19,6 @@ Install yarn (https://yarnpkg.com/getting-started/install)
 
 `yarn start`
 
-# Assumptions
-
-## State Pension
-
-The state pension provided assumes that you are entitled to the full state pension and which is currently £9660 per annum.
-
 # Limitation
 
 ## Whole years
