@@ -55,7 +55,7 @@ class PensionForm extends React.Component {
                             name="retirementAge"
                             id="form-retirementAge"
                             value={this.form.retirementAge}
-                            min={55}
+                            min={50}
                             max={70}
                             step={1}
                             valueLabelDisplay="on"

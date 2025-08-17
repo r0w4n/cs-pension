@@ -72,6 +72,11 @@ class MobilePensionForm extends React.Component {
                                 labelId="retirementAge"
                                 id="retirementAge"
                                 onChange={this.handleChange}>
+                                <MenuItem value="50">50</MenuItem>
+                                <MenuItem value="51">51</MenuItem>
+                                <MenuItem value="52">52</MenuItem>
+                                <MenuItem value="53">53</MenuItem>
+                                <MenuItem value="54">54</MenuItem>
                                 <MenuItem value="55">55</MenuItem>
                                 <MenuItem value="56">56</MenuItem>
                                 <MenuItem value="57">57</MenuItem>
