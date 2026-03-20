@@ -9987,13 +9987,13 @@ __metadata:
   linkType: hard
 
 "jsonpath@npm:^1.1.1":
-  version: 1.2.1
-  resolution: "jsonpath@npm:1.2.1"
+  version: 1.3.0
+  resolution: "jsonpath@npm:1.3.0"
   dependencies:
     esprima: 1.2.5
     static-eval: 2.1.1
     underscore: 1.13.6
-  checksum: 559e8bc5e559f9dfb0010c5ce555995f5bde08293ac73d2e715dcfe488f2669b5885fd848f23493d1731bf88cf429a857a9a30917fd90aeccb1745b1ed269e50
+  checksum: 7639c5cf8a1af9cdff7cc1ed8dce9f8e3d65104cf41d781034f192aecc32d1e54e9cdbf865aa5bff888a48d55dbb92095e2f5986e844e82bacf4f632c59cf288
   languageName: node
   linkType: hard
 
