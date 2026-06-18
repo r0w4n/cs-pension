@@ -37,7 +37,7 @@ function Page(props) {
                 <AppBar />
                 {props.children}
                 <BottomNavigation showLabels>
-                    <BottomNavigationAction label="Github" icon={<GitHubIcon />} href="https://github.com/r0w4n/cs-pension" />
+                    <BottomNavigationAction label="GitHub" icon={<GitHubIcon />} href="https://github.com/r0w4n/cs-pension" />
                     <BottomNavigationAction
                         label="Report"
                         icon={<BugReportIcon />}

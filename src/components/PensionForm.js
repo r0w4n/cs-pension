@@ -47,10 +47,7 @@ class PensionForm extends React.Component {
                     <Grid width="100%">
                         <InputLabel htmlFor="currentPensionPot">
                             Accrued Pension To Date
-                            <a
-                                href="https://www.civilservicepensionscheme.org.uk/your-pension/yearly-pension-update/annual-benefit-statement-abs/"
-                                target="_blank"
-                                rel="noreferrer">
+                            <a href="https://www.civilservicepensionscheme.org.uk/memberhub/KBarticle/?id=KA-01366" target="_blank" rel="noreferrer">
                                 <InfoTwoToneIcon />
                             </a>
                         </InputLabel>
@@ -95,7 +92,7 @@ class PensionForm extends React.Component {
                         <InputLabel htmlFor="monthlyAddedPensionPayment">
                             Monthly Added Pension Payments(£)
                             <a
-                                href="https://www.civilservicepensionscheme.org.uk/your-pension/managing-your-pension/increase-your-pension/added-pension/"
+                                href="https://www.civilservicepensionscheme.org.uk/memberhub/your-pension/managing-your-pension/added-pension/"
                                 target="_blank"
                                 rel="noreferrer">
                                 <InfoTwoToneIcon />
@@ -131,7 +128,7 @@ class PensionForm extends React.Component {
                             EPA
                             <a
                                 // eslint-disable-next-line max-len
-                                href="https://www.civilservicepensionscheme.org.uk/planning-for-retirement/what-are-my-options/early-retirement/epa-effective-pension-age/"
+                                href="https://www.civilservicepensionscheme.org.uk/memberhub/planning-for-retirement/what-are-my-options/early-retirement/epa/"
                                 target="_blank"
                                 rel="noreferrer">
                                 <InfoTwoToneIcon />
