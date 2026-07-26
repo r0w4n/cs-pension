@@ -1,5 +1,0 @@
-{
-    "yaml.schemas": {
-        "https://json.schemastore.org/github-action.json": "file:///Users/rowansmith/Documents/GitHub/cs-pension/.github/workflows/deploy.yaml"
-    }
-}
