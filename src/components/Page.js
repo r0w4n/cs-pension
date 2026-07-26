@@ -7,6 +7,7 @@ import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import InfoIcon from "@mui/icons-material/Info";
 
 import AppBar from "./AppBar";
+import BetaAnnouncement from "./BetaAnnouncement";
 
 function Page(props) {
     const THEME = createTheme({
@@ -33,6 +34,7 @@ function Page(props) {
     return (
         <ThemeProvider theme={THEME}>
             <CssBaseline />
+            <BetaAnnouncement />
             <Container maxWidth="lg">
                 <AppBar />
                 {props.children}
