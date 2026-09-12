@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardContent, Unstable_Grid2 as Grid, Box } from "@mui/material";
+import { Card, CardHeader, CardContent, Grid, Box } from "@mui/material";
 import "typeface-roboto";
 import PropTypes from "prop-types";
 
@@ -18,7 +18,7 @@ const NPACards = (props) => {
             </Box>
             <CardContent sx={{ m: -2 }}>
                 <Grid container spacing={1}>
-                    <Grid xs={12} sm={6} lg={3}>
+                    <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                         <PensionCard
                             title="Your annual pension is"
                             subtitle="including state pension"
@@ -26,7 +26,7 @@ const NPACards = (props) => {
                             statePension={statePension}
                         />
                     </Grid>
-                    <Grid xs={12} sm={6} lg={3}>
+                    <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                         <PensionCard
                             title="Your annual pension with added pension is"
                             subtitle="including state pension"
@@ -34,7 +34,7 @@ const NPACards = (props) => {
                             statePension={statePension}
                         />
                     </Grid>
-                    <Grid xs={12} sm={6} lg={3}>
+                    <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                         <PensionCard
                             title="Your annual pension with reduced hours is"
                             subtitle="including state pension"
@@ -42,7 +42,7 @@ const NPACards = (props) => {
                             statePension={statePension}
                         />
                     </Grid>
-                    <Grid xs={12} sm={6} lg={3}>
+                    <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                         <PensionCard
                             title="Your annual pension with reduced hours and added pension is"
                             subtitle="including state pension"

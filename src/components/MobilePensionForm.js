@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, TextField, Autocomplete, FormControl, Select, MenuItem, InputLabel, Input, InputAdornment, Unstable_Grid2 as Grid } from "@mui/material";
+import * as React from "react";
+import { Button, TextField, Autocomplete, FormControl, Select, MenuItem, InputLabel, Input, InputAdornment, Grid, Stack } from "@mui/material";
 import InfoTwoToneIcon from "@mui/icons-material/InfoTwoTone";
 import PropTypes from "prop-types";
 import isNumeric from "isnumeric";
@@ -22,7 +22,7 @@ class MobilePensionForm extends React.Component {
     render() {
         return (
             <form>
-                <Grid container direction={"column"} spacing={1}>
+                <Stack spacing={1}>
                     <Grid width="100%">
                         <InputLabel htmlFor="age">Age</InputLabel>
                         <Autocomplete
@@ -154,7 +154,6 @@ class MobilePensionForm extends React.Component {
                         <InputLabel id="EPAPension">
                             EPA
                             <a
-                                // eslint-disable-next-line max-len
                                 href="https://www.civilservicepensionscheme.org.uk/memberhub/planning-for-retirement/what-are-my-options/early-retirement/epa/"
                                 target="_blank"
                                 rel="noreferrer">
@@ -218,18 +217,18 @@ class MobilePensionForm extends React.Component {
                         </FormControl>
                     </Grid>
                     <Grid container width="100%">
-                        <Grid xs={6}>
+                        <Grid size={6}>
                             <Button variant="contained" onClick={this.changeTab} value="normal">
                                 Calculate for Normal Retirement
                             </Button>
                         </Grid>
-                        <Grid xs={6}>
+                        <Grid size={6}>
                             <Button variant="contained" onClick={this.changeTab} value="early">
                                 Calculate for Early Retirement
                             </Button>
                         </Grid>
                     </Grid>
-                </Grid>
+                </Stack>
             </form>
         );
     }

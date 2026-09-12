@@ -1,4 +1,4 @@
-import { Box, Unstable_Grid2 as Grid, Card, CardHeader, CardContent } from "@mui/material";
+import { Box, Grid, Card, CardHeader, CardContent } from "@mui/material";
 import "typeface-roboto";
 import PropTypes from "prop-types";
 
@@ -18,7 +18,7 @@ const EarlyRetirementCards = (props) => {
             </Box>
             <CardContent sx={{ m: -2 }}>
                 <Grid container spacing={1}>
-                    <Grid xs={12} sm={6} lg={3}>
+                    <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                         <PensionCard
                             title="Your annual early retirement pension is"
                             subtitle="including state pension (at NPA)"
@@ -26,7 +26,7 @@ const EarlyRetirementCards = (props) => {
                             statePension={statePension}
                         />
                     </Grid>
-                    <Grid xs={12} sm={6} lg={3}>
+                    <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                         <PensionCard
                             title="Your annual early retirement pension with added pension is"
                             subtitle="including state pension (at NPA)"
@@ -34,7 +34,7 @@ const EarlyRetirementCards = (props) => {
                             statePension={statePension}
                         />
                     </Grid>
-                    <Grid xs={12} sm={6} lg={3}>
+                    <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                         <PensionCard
                             title="Your annual early retirement pension with reduced hours is"
                             subtitle="including state pension (at NPA)"
@@ -42,7 +42,7 @@ const EarlyRetirementCards = (props) => {
                             statePension={statePension}
                         />
                     </Grid>
-                    <Grid xs={12} sm={6} lg={3}>
+                    <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
                         <PensionCard
                             title="Your annual early retirement pension with reduced hours and added pension is"
                             subtitle="including state pension (at NPA)"

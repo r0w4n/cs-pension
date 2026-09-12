@@ -1,23 +1,24 @@
 import { useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link } from "@mui/material";
 
-import { createBetaAnnouncementDismissalCookie, hasDismissedBetaAnnouncement } from "../betaAnnouncementCookie";
-
 function BetaAnnouncement() {
-    const [isOpen, setIsOpen] = useState(() => !hasDismissedBetaAnnouncement(document.cookie));
+    const [isOpen, setIsOpen] = useState(true);
 
     const dismissAnnouncement = () => {
-        document.cookie = createBetaAnnouncementDismissalCookie(window.location.protocol === "https:");
         setIsOpen(false);
     };
 
     return (
         <Dialog open={isOpen} onClose={dismissAnnouncement} aria-labelledby="beta-announcement-title">
-            <DialogTitle id="beta-announcement-title">Try the new beta calculator</DialogTitle>
+            <DialogTitle id="beta-announcement-title">The beta calculator is replacing this calculator</DialogTitle>
             <DialogContent>
-                <DialogContentText>There is a new beta version of the Civil Service Pension Calculator for you to try.</DialogContentText>
+                <DialogContentText>The Civil Service Pension Calculator is going to be replaced by the current beta version.</DialogContentText>
                 <DialogContentText sx={{ mt: 2 }}>
-                    If you find a bug, would like to suggest a feature, or have other feedback, you can find a feedback form in the footer of the beta app.
+                    If there is a reason you are still using the old calculator, please get in touch using the{" "}
+                    <Link href="https://forms.gle/mqgPbWFLt9byHC7B8" target="_blank" rel="noopener noreferrer">
+                        feedback form
+                    </Link>{" "}
+                    for the beta app.
                 </DialogContentText>
             </DialogContent>
             <DialogActions>

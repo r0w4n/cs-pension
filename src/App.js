@@ -3,8 +3,8 @@
  * @todo EPA testing and work with NPA calculations
  */
 
-import { useState, React } from "react";
-import { useTheme, useMediaQuery, Unstable_Grid2 as Grid } from "@mui/material/";
+import { useState } from "react";
+import { useTheme, useMediaQuery, Grid, Stack } from "@mui/material";
 
 import { calculatePensionPots } from "./pension";
 import PensionForm from "./components/PensionForm";
@@ -42,7 +42,7 @@ function App() {
         // is mobile?
         return (
             <Page>
-                <Grid container direction={"column"} spacing={1}>
+                <Stack spacing={1}>
                     <Tabs tabSelection={selectedTab} onTabChange={handleTabChange}>
                         <TabContent name="normal">
                             <NPACards data={cardData} />
@@ -54,17 +54,17 @@ function App() {
                             <MobilePensionForm initialState={settings} onChange={handleUpdatePensionCards} onChangeTab={triggerTabChange} />
                         </TabContent>
                     </Tabs>
-                </Grid>
+                </Stack>
             </Page>
         );
     } else {
         return (
             <Page>
                 <Grid container spacing={2}>
-                    <Grid xs={12} sm={5} md={4} lg={4}>
+                    <Grid size={{ xs: 12, sm: 5, md: 4, lg: 4 }}>
                         <PensionForm initialState={settings} onChange={handleUpdatePensionCards} />
                     </Grid>
-                    <Grid xs={12} sm={7} md={8} lg={8}>
+                    <Grid size={{ xs: 12, sm: 7, md: 8, lg: 8 }}>
                         <Grid paddingTop={1}>
                             <NPACards data={cardData} />
                         </Grid>

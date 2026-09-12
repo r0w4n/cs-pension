@@ -1,5 +1,5 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { Tab } from "@mui/material/";
+import { Tab } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PropTypes from "prop-types";
 

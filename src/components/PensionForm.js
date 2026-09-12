@@ -1,5 +1,5 @@
-import React from "react";
-import { FormControl, Select, MenuItem, Slider, InputLabel, Input, InputAdornment, Unstable_Grid2 as Grid } from "@mui/material";
+import * as React from "react";
+import { FormControl, Select, MenuItem, Slider, InputLabel, Input, InputAdornment, Grid, Stack } from "@mui/material";
 import InfoTwoToneIcon from "@mui/icons-material/InfoTwoTone";
 import PropTypes from "prop-types";
 import isNumeric from "isnumeric";
@@ -21,7 +21,7 @@ class PensionForm extends React.Component {
     render() {
         return (
             <form>
-                <Grid container direction={"column"} spacing={1}>
+                <Stack spacing={1}>
                     <Grid sx={{ mt: 2 }} width="100%">
                         <InputLabel>Age</InputLabel>
                         <Slider name="age" value={this.form.age} min={16} max={70} step={1} valueLabelDisplay="on" onChange={this.handleChange} />
@@ -127,7 +127,6 @@ class PensionForm extends React.Component {
                         <InputLabel id="EPAPension">
                             EPA
                             <a
-                                // eslint-disable-next-line max-len
                                 href="https://www.civilservicepensionscheme.org.uk/memberhub/planning-for-retirement/what-are-my-options/early-retirement/epa/"
                                 target="_blank"
                                 rel="noreferrer">
@@ -187,7 +186,7 @@ class PensionForm extends React.Component {
                             />
                         </FormControl>
                     </Grid>
-                </Grid>
+                </Stack>
             </form>
         );
     }

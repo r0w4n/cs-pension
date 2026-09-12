@@ -1,4 +1,4 @@
-import { BottomNavigation, BottomNavigationAction, ThemeProvider, createTheme, CssBaseline, Container } from "@mui/material/";
+import { BottomNavigation, BottomNavigationAction, ThemeProvider, createTheme, CssBaseline, Container } from "@mui/material";
 import PropTypes from "prop-types";
 import CookieConsent from "react-cookie-consent";
 import GitHubIcon from "@mui/icons-material/GitHub";

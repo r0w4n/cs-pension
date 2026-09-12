@@ -6,17 +6,17 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^5.18.0",
-    "@mui/lab": "^5.0.0-alpha.177",
-    "@mui/material": "^5.18.0",
+    "@mui/icons-material": "^9.4.0",
+    "@mui/lab": "^9.0.0-beta.9",
+    "@mui/material": "^9.4.0",
     "isnumeric": "^0.3.3",
     "prop-types": "^15.8.1",
-    "react": "^18.3.1",
-    "react-cookie-consent": "^8.0.1",
-    "react-dom": "^18.3.1",
-    "react-ga4": "^1.4.1",
+    "react": "^19.3.0",
+    "react-cookie-consent": "^10.0.2",
+    "react-dom": "^19.3.0",
+    "react-ga4": "^3.0.1",
     "typeface-roboto": "^1.1.13",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^6.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,18 +44,20 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "babel-jest": "^29.7.0",
-    "eslint": "^8.57.1",
+    "@babel/core": "^7.29.7",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "babel-jest": "^30.5.1",
+    "eslint": "^9.39.5",
     "eslint-config-google": "latest",
-    "eslint-config-prettier": "^8.10.2",
-    "eslint-plugin-jest": "^27.9.0",
-    "eslint-plugin-prettier": "^4.2.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jest": "^29.16.6",
+    "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-react": "latest",
-    "jest": "^29.7.0",
-    "prettier": "^2.8.8",
+    "jest": "^30.5.1",
+    "prettier": "^3.9.6",
     "react-scripts": "^5.0.1"
   }
 }
